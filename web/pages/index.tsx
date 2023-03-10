@@ -1,7 +1,36 @@
 import Layout from '@/layout/Layout';
+import { useUser } from '@auth0/nextjs-auth0/client';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import HashLoader from 'react-spinners/HashLoader';
 
 export default function Home() {
+  const { user, isLoading, error } = useUser();
+
+  const router = useRouter();
+
+  if (error) {
+    return (
+      <Layout>
+        <p>
+          An error occurred loading the application, please try again later.
+        </p>
+      </Layout>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className='flex items-center justify-center h-screen p-4'>
+        <HashLoader color='#D0EBAE' />
+      </div>
+    );
+  }
+
+  if (user) {
+    router.push('/dashboard');
+  }
+
   return (
     <Layout>
       <div className='h-96 p-8 pt-32'>

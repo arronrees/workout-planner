@@ -5,7 +5,39 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        xs: '525px',
+      },
+    },
+    colors: {
+      'dark-blue': {
+        DEFAULT: '#262D3F',
+      },
+      'light-blue': {
+        DEFAULT: '#E4ECF9',
+      },
+      green: {
+        DEFAULT: '#D0EBAE',
+        light: '#E5F3D3',
+        'x-light': '#F5F8F1',
+      },
+      red: {
+        DEFAULT: '#F5BABA',
+        light: '#FADCDC',
+        'x-light': '#FBEDED',
+      },
+      orange: {
+        DEFAULT: '#FCEABC',
+      },
+      grey: {
+        DEFAULT: '#868686',
+        light: '#F0F0F0',
+      },
+    },
+    fontFamily: {
+      sans: ['Sora', 'sans-serif'],
+    },
   },
   plugins: [],
 };

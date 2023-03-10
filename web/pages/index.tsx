@@ -22,10 +22,7 @@ export default function Home() {
         <p className='font-semibold text-center mb-16 text-grey'>
           Sign up to get started tracking your workouts and reaching your goals
         </p>
-        <a
-          href='/api/auth/login'
-          className='bg-green px-8 py-4 rounded font-bold block text-center'
-        >
+        <a href='/api/auth/login' className='btn btn--green text-center'>
           Sign In
         </a>
       </section>

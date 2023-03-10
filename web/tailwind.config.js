@@ -7,17 +7,17 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        xs: '525px',
+        xs: '500px',
       },
     },
     colors: {
-      'dark-blue': {
-        DEFAULT: '#262D3F',
-      },
-      'light-blue': {
-        DEFAULT: '#E4ECF9',
+      blue: {
+        dark: '#262D3F',
+        light: '#E4ECF9',
       },
       green: {
+        'x-dark': '#BCD59E',
+        dark: '#C5DEA5',
         DEFAULT: '#D0EBAE',
         light: '#E5F3D3',
         'x-light': '#F5F8F1',

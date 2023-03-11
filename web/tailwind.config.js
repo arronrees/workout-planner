@@ -13,8 +13,16 @@ module.exports = {
     },
     colors: {
       blue: {
-        dark: '#262D3F',
-        light: '#E4ECF9',
+        dark: {
+          'x-dark': '#D9E3EF',
+          dark: '#DDE6F2',
+          DEFAULT: '#262D3F',
+        },
+        light: {
+          'x-dark': '#D9E3EF',
+          dark: '#DDE6F2',
+          DEFAULT: '#E4ECF9',
+        },
       },
       green: {
         'x-dark': '#BCD59E',
@@ -29,6 +37,8 @@ module.exports = {
         'x-light': '#FBEDED',
       },
       orange: {
+        'x-dark': '#F0D795',
+        dark: '#F5E0A9',
         DEFAULT: '#FCEABC',
       },
       grey: {

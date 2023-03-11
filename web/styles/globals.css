@@ -22,9 +22,25 @@ img {
 }
 
 .btn {
-  @apply px-8 py-4 rounded font-bold block active:translate-y-[1px] transition duration-150 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2;
+  @apply px-8 py-4 block rounded shadow active:translate-y-[1px] transition duration-200 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2;
 }
 
 .btn--green {
   @apply bg-green hover:bg-green-dark focus:bg-green-dark active:bg-green-x-dark ring-green-light;
+}
+
+.btn--blue {
+  @apply bg-blue-light hover:bg-blue-light-dark focus:bg-blue-light-dark active:bg-blue-light-x-dark ring-blue-light/50;
+}
+
+.btn--orange {
+  @apply bg-orange hover:bg-orange-dark focus:bg-orange-dark active:bg-orange-x-dark ring-orange/50;
+}
+
+.btn--primary {
+  @apply text-center font-bold;
+}
+
+.btn--secondary {
+  @apply font-extralight text-xl flex items-center justify-between;
 }

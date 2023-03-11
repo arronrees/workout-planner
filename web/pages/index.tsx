@@ -44,14 +44,14 @@ export default function Home() {
           />
         </figure>
       </div>
-      <section className='p-4'>
+      <section>
         <h1 className='font-extralight text-4xl text-center mb-4'>
           Let&apos;s get moving
         </h1>
         <p className='font-semibold text-center mb-16 text-grey'>
           Sign up to get started tracking your workouts and reaching your goals
         </p>
-        <a href='/api/auth/login' className='btn btn--green text-center'>
+        <a href='/api/auth/login' className='btn btn--green btn--primary'>
           Sign In
         </a>
       </section>

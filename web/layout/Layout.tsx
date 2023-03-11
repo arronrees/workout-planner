@@ -49,7 +49,7 @@ export default function Layout({ children }: Props) {
             </div>
           ))}
       </header>
-      <div className='py-6'>{children}</div>
+      <div className='pt-12'>{children}</div>
     </div>
   );
 }

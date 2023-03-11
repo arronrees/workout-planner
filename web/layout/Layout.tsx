@@ -29,20 +29,25 @@ export default function Layout({ children }: Props) {
             />
           </svg>
         </button>
-        {user && user.picture && (
-          <div className='bg-grey-light w-14 h-14 rounded-full border-2 border-blue-dark'>
-            <figure>
-              <Image
-                src={user.picture}
-                alt=''
-                width={56}
-                height={56}
-                priority
-                className='rounded-full'
-              />
-            </figure>
-          </div>
-        )}
+        {user &&
+          (user.picture ? (
+            <div className='bg-grey-light w-14 h-14 rounded-full border-2 border-blue-dark'>
+              <figure>
+                <Image
+                  src={user.picture}
+                  alt=''
+                  width={56}
+                  height={56}
+                  priority
+                  className='rounded-full'
+                />
+              </figure>
+            </div>
+          ) : (
+            <div className='bg-grey-light w-14 h-14 rounded-full border-2 border-blue-dark flex items-center justify-center'>
+              <span>{user.name && user.name[0]}</span>
+            </div>
+          ))}
       </header>
       <div className='py-6'>{children}</div>
     </div>

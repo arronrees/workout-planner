@@ -13,13 +13,13 @@ export default function Dashboard({ user }: Props) {
   return (
     <Layout>
       <div className='mb-6'>
-        <p className='font-extralight text-4xl mb-2'>
+        <h1 className='font-extralight text-4xl mb-2'>
           Hello, {user.name?.split(' ')[0]}
-        </p>
+        </h1>
         <p className='font-semibold text-grey'>Let&apos;s get started</p>
       </div>
       <div className='grid gap-3'>
-        <Link href='/' className='btn btn--blue btn--secondary'>
+        <Link href='/workouts/new' className='btn btn--blue btn--secondary'>
           New workout
           <svg
             xmlns='http://www.w3.org/2000/svg'

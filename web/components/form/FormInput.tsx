@@ -54,3 +54,60 @@ export function FormInputTextArea({
     </div>
   );
 }
+
+type FormInputSelectProps = {
+  inputId: string;
+  inputName: string;
+  labelText: string;
+  options: {
+    id: string | number;
+    value: string | number;
+    name: string;
+  }[];
+};
+
+export function FormInputSelect({
+  inputId,
+  inputName,
+  labelText,
+  options,
+}: FormInputSelectProps) {
+  return (
+    <div>
+      <label htmlFor={inputId} className='block mb-2 font-bold text-xs'>
+        {labelText}
+      </label>
+      <div className='relative'>
+        <select
+          name={inputName}
+          id={inputId}
+          className='block rounded border border-grey-light w-full p-4 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 ring-grey-light/50 bg-grey-light/50 appearance-none text-base'
+          defaultValue='default'
+        >
+          <option value='default' disabled>
+            Select
+          </option>
+          {options.map((option) => (
+            <option value={option.value} key={option.id}>
+              {option.name}
+            </option>
+          ))}
+        </select>
+        <svg
+          xmlns='http://www.w3.org/2000/svg'
+          fill='none'
+          viewBox='0 0 24 24'
+          strokeWidth={1.5}
+          stroke='currentColor'
+          className='w-4 h-4 absolute top-1/2 -translate-y-1/2 right-4 opacity-60'
+        >
+          <path
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            d='M19.5 8.25l-7.5 7.5-7.5-7.5'
+          />
+        </svg>
+      </div>
+    </div>
+  );
+}

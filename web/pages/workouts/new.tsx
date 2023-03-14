@@ -1,4 +1,9 @@
-import { FormInputText, FormInputTextArea } from '@/components/form/FormInput';
+import {
+  FormInputSelect,
+  FormInputText,
+  FormInputTextArea,
+} from '@/components/form/FormInput';
+import { muscleGroups } from '@/constants';
 import Layout from '@/layout/Layout';
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import { UserProfile } from '@auth0/nextjs-auth0/client';
@@ -27,6 +32,12 @@ export default function NewWorkout({ user }: Props) {
           inputId='shortDescription'
           inputName='shortDescription'
           labelText='Short description'
+        />
+        <FormInputSelect
+          inputId='muscleGroupFocus'
+          inputName='muscleGroupFocus'
+          labelText='Muscle Group Focus'
+          options={muscleGroups}
         />
         <FormInputText
           inputId='equipment'

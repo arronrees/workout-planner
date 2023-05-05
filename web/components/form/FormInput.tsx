@@ -3,6 +3,7 @@ type FormInputTextProps = {
   inputId: string;
   inputName: string;
   inputValue?: string;
+  optional?: boolean;
 };
 
 export function FormInputText({
@@ -10,11 +11,17 @@ export function FormInputText({
   inputId,
   inputName,
   inputValue,
+  optional,
 }: FormInputTextProps) {
   return (
     <div>
       <label htmlFor={inputId} className='block mb-2 font-bold text-xs'>
-        {labelText}
+        {labelText}{' '}
+        {optional ? (
+          <span className='opacity-30 font-normal ml-1'>(optional)</span>
+        ) : (
+          ''
+        )}
       </label>
       <input
         type='text'
@@ -32,6 +39,7 @@ type FormInputTextAreaProps = {
   inputId: string;
   inputName: string;
   inputValue?: string;
+  optional?: boolean;
 };
 
 export function FormInputTextArea({
@@ -39,11 +47,17 @@ export function FormInputTextArea({
   inputId,
   inputName,
   inputValue,
+  optional,
 }: FormInputTextAreaProps) {
   return (
     <div>
       <label htmlFor={inputId} className='block mb-2 font-bold text-xs'>
-        {labelText}
+        {labelText}{' '}
+        {optional ? (
+          <span className='opacity-30 font-normal ml-1'>(optional)</span>
+        ) : (
+          ''
+        )}
       </label>
       <textarea
         name={inputName}
@@ -64,6 +78,7 @@ type FormInputSelectProps = {
     value: string | number;
     name: string;
   }[];
+  optional?: boolean;
 };
 
 export function FormInputSelect({
@@ -71,11 +86,17 @@ export function FormInputSelect({
   inputName,
   labelText,
   options,
+  optional,
 }: FormInputSelectProps) {
   return (
     <div>
       <label htmlFor={inputId} className='block mb-2 font-bold text-xs'>
-        {labelText}
+        {labelText}{' '}
+        {optional ? (
+          <span className='opacity-30 font-normal ml-1'>(optional)</span>
+        ) : (
+          ''
+        )}
       </label>
       <div className='relative'>
         <select

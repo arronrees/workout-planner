@@ -13,11 +13,11 @@ type Props = {
   user: UserProfile;
 };
 
-export default function NewWorkout({ user }: Props) {
+export default function NewExercise({ user }: Props) {
   return (
     <Layout>
       <div>
-        <h1 className='text-2xl mb-1'>New Workout</h1>
+        <h1 className='text-2xl mb-1'>New Exercise</h1>
         <p className='text-grey text-xs'>Let&apos;s get started</p>
       </div>
       <div className='py-4'>
@@ -25,15 +25,9 @@ export default function NewWorkout({ user }: Props) {
       </div>
       <section className='grid gap-4'>
         <FormInputText
-          inputId='workoutName'
-          inputName='workoutName'
-          labelText='Name of workout'
-        />
-        <FormInputText
-          inputId='shortDescription'
-          inputName='shortDescription'
-          labelText='Short description'
-          optional
+          inputId='exerciseName'
+          inputName='exerciseName'
+          labelText='Name of exercise'
         />
         <FormInputSelect
           inputId='muscleGroupFocus'
@@ -53,7 +47,7 @@ export default function NewWorkout({ user }: Props) {
           labelText='Workout notes'
           optional
         />
-        <FormButton text='Create Workout' />
+        <FormButton text='Create Exercise' />
       </section>
     </Layout>
   );

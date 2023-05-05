@@ -44,6 +44,7 @@ module.exports = {
       grey: {
         DEFAULT: '#868686',
         light: '#F0F0F0',
+        'x-light': '#F8F8F8',
       },
     },
     fontFamily: {

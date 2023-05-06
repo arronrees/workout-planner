@@ -1,7 +1,13 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
+import { PrismaClient } from '@prisma/client';
 import express, { Request, Response, NextFunction } from 'express';
 import morgan from 'morgan';
+
+export const prismaDB = new PrismaClient({
+  errorFormat: 'pretty',
+  log: ['query', 'info', 'warn'],
+});
 
 const app = express();
 
@@ -31,4 +37,8 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err);
 
   res.status(500).json({ error: err.message });
+});
+
+app.listen(4000, () => {
+  console.log('Server running on port 4000');
 });

@@ -22,7 +22,7 @@ img {
 }
 
 .btn {
-  @apply px-8 py-4 block rounded shadow active:translate-y-[1px] transition duration-200 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2;
+  @apply px-8 py-4 block rounded shadow text-center text-sm font-semibold active:translate-y-[1px] transition duration-200 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2;
 }
 
 .btn--green {
@@ -37,8 +37,8 @@ img {
   @apply bg-orange hover:bg-orange-dark focus:bg-orange-dark active:bg-orange-x-dark ring-orange/50;
 }
 
-.btn--primary {
-  @apply text-center font-bold;
+.btn--red {
+  @apply bg-red hover:bg-red-dark focus:bg-red-dark active:bg-red-x-dark ring-red/50;
 }
 
 .btn--secondary {

@@ -8,8 +8,6 @@ type Props = {
 };
 
 export default function Dashboard({ user }: Props) {
-  console.log(user);
-
   return (
     <Layout>
       <div className='mb-6'>

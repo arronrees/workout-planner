@@ -26,7 +26,7 @@ export default function Header() {
           </svg>
         </button>
         <Link
-          href='/dashboard'
+          href='/'
           className='px-3 py-4 h-14 rounded shadow flex items-center justify-center bg-grey-x-light transition duration-150 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 active:translate-y-[1px] ring-grey-light/50'
         >
           <svg
@@ -45,25 +45,28 @@ export default function Header() {
           </svg>
         </Link>
       </div>
-      {user &&
-        (user.picture ? (
-          <div className='bg-grey-light w-14 h-14 rounded-full border-2 border-blue-dark'>
-            <figure>
-              <Image
-                src={user.picture}
-                alt=''
-                width={56}
-                height={56}
-                priority
-                className='rounded-full'
-              />
-            </figure>
-          </div>
-        ) : (
-          <div className='bg-grey-light w-14 h-14 rounded-full border-2 border-blue-dark flex items-center justify-center'>
-            <span>{user.name && user.name[0]}</span>
-          </div>
-        ))}
+      {user && (
+        <Link href='/profile'>
+          {user.picture ? (
+            <div className='bg-grey-light w-14 h-14 rounded-full border-2 border-blue-dark'>
+              <figure>
+                <Image
+                  src={user.picture}
+                  alt=''
+                  width={56}
+                  height={56}
+                  priority
+                  className='rounded-full'
+                />
+              </figure>
+            </div>
+          ) : (
+            <div className='bg-grey-light w-14 h-14 rounded-full border-2 border-blue-dark flex items-center justify-center'>
+              <span>{user.name && user.name[0]}</span>
+            </div>
+          )}
+        </Link>
+      )}
     </header>
   );
 }

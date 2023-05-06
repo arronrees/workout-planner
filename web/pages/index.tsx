@@ -51,7 +51,7 @@ export default function Home() {
         <p className='font-semibold text-center mb-16 text-grey'>
           Sign up to get started tracking your workouts and reaching your goals
         </p>
-        <a href='/api/auth/login' className='btn btn--green btn--primary'>
+        <a href='/api/auth/login' className='btn btn--green'>
           Sign In
         </a>
       </section>

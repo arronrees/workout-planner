@@ -3,6 +3,7 @@ dotenv.config();
 import { PrismaClient } from '@prisma/client';
 import express, { Request, Response, NextFunction } from 'express';
 import morgan from 'morgan';
+import { authRouter } from './routes/auth.routes';
 
 export const prismaDB = new PrismaClient({
   errorFormat: 'pretty',
@@ -26,6 +27,9 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 app.get('/', async (req: Request, res: Response) => {
   res.send('home');
 });
+
+// routes
+app.use('/api/auth', authRouter);
 
 // error handler
 app.use('*', (req: Request, res: Response, next: NextFunction) => {

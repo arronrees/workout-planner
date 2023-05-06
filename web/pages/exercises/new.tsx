@@ -6,14 +6,8 @@ import {
 } from '@/components/form/FormInput';
 import { muscleGroups } from '@/constants';
 import Layout from '@/layout/Layout';
-import { withPageAuthRequired } from '@auth0/nextjs-auth0';
-import { UserProfile } from '@auth0/nextjs-auth0/client';
 
-type Props = {
-  user: UserProfile;
-};
-
-export default function NewExercise({ user }: Props) {
+export default function NewExercise() {
   return (
     <Layout>
       <div>
@@ -52,5 +46,3 @@ export default function NewExercise({ user }: Props) {
     </Layout>
   );
 }
-
-export const getServerSideProps = withPageAuthRequired();

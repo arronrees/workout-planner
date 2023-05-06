@@ -1,10 +1,7 @@
-import { useUser } from '@auth0/nextjs-auth0/client';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Header() {
-  const { user } = useUser();
-
   return (
     <header className='flex items-center justify-between'>
       <div className='flex items-center gap-4'>
@@ -45,7 +42,7 @@ export default function Header() {
           </svg>
         </Link>
       </div>
-      {user && (
+      {/* {user && (
         <Link href='/profile'>
           {user.picture ? (
             <div className='bg-grey-light w-14 h-14 rounded-full border-2 border-blue-dark'>
@@ -66,7 +63,7 @@ export default function Header() {
             </div>
           )}
         </Link>
-      )}
+      )} */}
     </header>
   );
 }

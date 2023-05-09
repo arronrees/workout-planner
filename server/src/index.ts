@@ -38,6 +38,7 @@ app.use('*', (req: Request, res: Response, next: NextFunction) => {
 
 // error handler
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error('--- error handler');
   console.error(err);
 
   res.status(500).json({ error: err.message });

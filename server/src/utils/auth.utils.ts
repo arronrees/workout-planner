@@ -9,6 +9,15 @@ export async function hashPassword(password: string): Promise<string> {
   return hashedPassword;
 }
 
+export async function comparePassword(
+  inputPassword: string,
+  passwordToCompare: string
+): Promise<boolean> {
+  const passwordsMatch = await compare(inputPassword, passwordToCompare);
+
+  return passwordsMatch;
+}
+
 export function createJwtToken(id: string) {
   return sign({ id }, process.env.JWT_SECRET as string, { expiresIn: '7d' });
 }

@@ -1,7 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
-import { SignupUserType } from '../models/user.model';
+import { SigninUserType, SignupUserType } from '../models/user.model';
 import { prismaDB } from '..';
-import { createJwtToken, hashPassword } from '../utils/auth.utils';
+import {
+  comparePassword,
+  createJwtToken,
+  hashPassword,
+} from '../utils/auth.utils';
 import { omit } from 'lodash';
 import emailService from '../services/email.service';
 import randomstring from 'randomstring';
@@ -51,6 +55,55 @@ export async function signupUserController(
     return res.status(200).json({
       success: true,
       data: omit({ ...newUser, token }, [
+        'password',
+        'emailVerificationString',
+      ]),
+    });
+  } catch (err) {
+    console.error(err);
+
+    next(err);
+  }
+}
+
+// POST /signin
+export async function signinUserController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const { user }: { user: SigninUserType } = req.body;
+
+    // check if user exists in db before checking password
+    const userExists = await prismaDB.user.findUnique({
+      where: { email: user.email },
+    });
+
+    if (!userExists) {
+      return res
+        .status(401)
+        .json({ success: false, error: 'Incorrect details, please try again' });
+    }
+
+    // compare passwords
+    const passwordCheck = await comparePassword(
+      user.password,
+      userExists.password
+    );
+
+    if (!passwordCheck) {
+      return res
+        .status(401)
+        .json({ success: false, error: 'Incorrect details, please try again' });
+    }
+
+    // generate token
+    const token = createJwtToken(userExists.id);
+
+    return res.status(200).json({
+      success: true,
+      data: omit({ ...userExists, token }, [
         'password',
         'emailVerificationString',
       ]),

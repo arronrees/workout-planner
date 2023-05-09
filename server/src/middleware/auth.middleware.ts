@@ -1,10 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 import { signinUserModel, signupUserModel } from '../models/user.model';
 import { z } from 'zod';
+import { JsonApiResponse } from '../constant-types';
 
 export async function checkUserSignupObjectValid(
   req: Request,
-  res: Response,
+  res: Response<JsonApiResponse>,
   next: NextFunction
 ) {
   try {
@@ -30,7 +31,7 @@ export async function checkUserSignupObjectValid(
 
 export async function checkUserSigninObjectValid(
   req: Request,
-  res: Response,
+  res: Response<JsonApiResponse>,
   next: NextFunction
 ) {
   try {

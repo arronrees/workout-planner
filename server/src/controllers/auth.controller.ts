@@ -10,11 +10,12 @@ import { omit } from 'lodash';
 import emailService from '../services/email.service';
 import randomstring from 'randomstring';
 import checkValidUuid from '../utils/index.utils';
+import { JsonApiResponse } from '../constant-types';
 
 // POST /signup
 export async function signupUserController(
   req: Request,
-  res: Response,
+  res: Response<JsonApiResponse>,
   next: NextFunction
 ) {
   try {
@@ -69,7 +70,7 @@ export async function signupUserController(
 // POST /signin
 export async function signinUserController(
   req: Request,
-  res: Response,
+  res: Response<JsonApiResponse>,
   next: NextFunction
 ) {
   try {
@@ -118,7 +119,7 @@ export async function signinUserController(
 // POST /email/verify/:id/:token
 export async function verifyEmailController(
   req: Request,
-  res: Response,
+  res: Response<JsonApiResponse>,
   next: NextFunction
 ) {
   try {

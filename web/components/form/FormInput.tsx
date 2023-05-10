@@ -1,9 +1,13 @@
+import React from 'react';
+
 type FormInputTextProps = {
   labelText: string;
   inputId: string;
   inputName: string;
   inputValue?: string;
   optional?: boolean;
+  type: 'text' | 'email' | 'password' | 'number' | 'tel';
+  onChangeEvent: React.ChangeEventHandler<HTMLInputElement>;
 };
 
 export function FormInputText({
@@ -12,6 +16,8 @@ export function FormInputText({
   inputName,
   inputValue,
   optional,
+  type,
+  onChangeEvent,
 }: FormInputTextProps) {
   return (
     <div>
@@ -24,10 +30,11 @@ export function FormInputText({
         )}
       </label>
       <input
-        type='text'
+        type={type}
         name={inputName}
         id={inputId}
         value={inputValue}
+        onChange={onChangeEvent}
         className='block rounded border border-grey-light w-full p-4 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 ring-grey-light/50 bg-grey-light/50'
       />
     </div>

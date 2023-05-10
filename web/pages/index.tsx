@@ -1,7 +1,7 @@
 import Layout from '@/layout/Layout';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import HashLoader from 'react-spinners/HashLoader';
 
 export default function Home() {
   const router = useRouter();
@@ -23,12 +23,18 @@ export default function Home() {
         <h1 className='font-extralight text-4xl text-center mb-4'>
           Let&apos;s get moving
         </h1>
-        <p className='font-semibold text-center mb-16 text-grey'>
+        <p className='font text-center mb-16 text-grey'>
           Sign up to get started tracking your workouts and reaching your goals
         </p>
-        <a href='/api/auth/login' className='btn btn--green'>
-          Sign In
+        <a href='/auth/signup' className='btn btn--green'>
+          Register Now
         </a>
+        <p className='text-center font-extralight text-sm mt-6'>
+          Already have an account?{' '}
+          <Link href='/auth/signin' className='font-semibold'>
+            Sign In
+          </Link>
+        </p>
       </section>
     </Layout>
   );

@@ -1,4 +1,5 @@
 import Layout from '@/layout/Layout';
+import { withSessionSsr } from '@/utils/iron/withSession';
 import Link from 'next/link';
 
 export default function Dashboard() {
@@ -67,3 +68,22 @@ export default function Dashboard() {
     </Layout>
   );
 }
+
+export const getServerSideProps = withSessionSsr(
+  async function getServerSideProps({ req, res }) {
+    const user = req.session.user;
+
+    if (!user) {
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false,
+        },
+      };
+    } else {
+      return {
+        props: {},
+      };
+    }
+  }
+);

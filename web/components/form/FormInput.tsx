@@ -1,5 +1,7 @@
+import { ReactNode } from 'react';
+
 type FormInputTextProps = {
-  children: JSX.Element;
+  children: ReactNode;
   labelText: string;
   inputId: string;
   optional?: boolean;

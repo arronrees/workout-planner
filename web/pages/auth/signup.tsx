@@ -77,7 +77,7 @@ export default function SignUp() {
   });
 
   return (
-    <Layout>
+    <Layout userNotRequired>
       <section>
         <h1 className='font-extralight text-4xl text-center mb-4'>
           Let&apos;s get moving

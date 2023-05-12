@@ -2,13 +2,10 @@ import Layout from '@/layout/Layout';
 import { withSessionSsr } from '@/utils/iron/withSession';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 export default function Home() {
-  const router = useRouter();
-
   return (
-    <Layout>
+    <Layout userNotRequired>
       <div className='h-96 p-8 pt-32'>
         <figure>
           <Image

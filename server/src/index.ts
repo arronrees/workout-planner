@@ -4,6 +4,8 @@ import { PrismaClient } from '@prisma/client';
 import express, { Request, Response, NextFunction } from 'express';
 import morgan from 'morgan';
 import { authRouter } from './routes/auth.routes';
+import { userRouter } from './routes/user.routes';
+import { checkJwtExits } from './middleware/auth.middleware';
 
 export const prismaDB = new PrismaClient({
   errorFormat: 'pretty',
@@ -30,6 +32,8 @@ app.get('/', async (req: Request, res: Response) => {
 
 // routes
 app.use('/api/auth', authRouter);
+app.use(checkJwtExits);
+app.use('/api/user', userRouter);
 
 // error handler
 app.use('*', (req: Request, res: Response, next: NextFunction) => {

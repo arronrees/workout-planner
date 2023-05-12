@@ -33,3 +33,21 @@ export const signinUserModel = z.object({
 });
 
 export type SigninUserType = z.infer<typeof signinUserModel>;
+
+export const userPasswordUpdateModel = z
+  .object({
+    password: z.string({
+      required_error: 'Password is required',
+      invalid_type_error: 'Password must be a string',
+    }),
+    passwordConfirmation: z.string({
+      required_error: 'Password confirmation is required',
+      invalid_type_error: 'Password confirmation must be a string',
+    }),
+  })
+  .refine((data) => data.password === data.passwordConfirmation, {
+    message: 'Passwords do not match',
+    path: ['passwordConfirmation'],
+  });
+
+export type UserPasswordUpdateType = z.infer<typeof userPasswordUpdateModel>;

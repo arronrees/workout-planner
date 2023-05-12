@@ -45,7 +45,6 @@ export default function SignUp() {
       body: JSON.stringify(formData),
     });
     const responseData = await res.json();
-    console.log(responseData);
 
     if (!res.ok) {
       if (responseData.error && typeof responseData.error === 'string') {

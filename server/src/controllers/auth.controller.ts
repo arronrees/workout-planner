@@ -45,6 +45,14 @@ export async function signupUserController(
     // generate token
     const token = createJwtToken(newUser.id);
 
+    res.status(200).json({
+      success: true,
+      data: omit({ ...newUser, token }, [
+        'password',
+        'emailVerificationString',
+      ]),
+    });
+
     // send verification email
     const verificationEmailMessage = await emailService.sendEmailVerification(
       newUser.email,
@@ -53,13 +61,7 @@ export async function signupUserController(
       randomString
     );
 
-    return res.status(200).json({
-      success: true,
-      data: omit({ ...newUser, token }, [
-        'password',
-        'emailVerificationString',
-      ]),
-    });
+    return;
   } catch (err) {
     console.error(err);
 

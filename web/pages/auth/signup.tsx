@@ -2,6 +2,7 @@ import { FormButton } from '@/components/form/FormButton';
 import { FormInputText } from '@/components/form/FormInput';
 import DividerLine from '@/components/general/DividerLine';
 import Layout from '@/layout/Layout';
+import { withSessionSsr } from '@/utils/iron/withSession';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -53,6 +54,10 @@ export default function SignUp() {
         return;
       }
     } else {
+      if (responseData.data?.name) {
+        toast.success(`Welcome, ${responseData.data.name}`);
+      }
+
       router.push('/');
       setIsLoading(false);
       return;
@@ -154,3 +159,22 @@ export default function SignUp() {
     </Layout>
   );
 }
+
+export const getServerSideProps = withSessionSsr(
+  async function getServerSideProps({ req, res }) {
+    const user = req.session.user;
+
+    if (user) {
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false,
+        },
+      };
+    } else {
+      return {
+        props: {},
+      };
+    }
+  }
+);

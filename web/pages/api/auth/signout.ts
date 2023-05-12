@@ -6,7 +6,12 @@ export default withSessionRoute(signOutUser);
 async function signOutUser(req: NextApiRequest, res: NextApiResponse) {
   try {
     req.session.destroy();
-    res.status(200).json({ data: 'Logout success' });
+
+    if (req.method === 'GET') {
+      return res.redirect('/');
+    }
+
+    return res.status(200).json({ data: 'Logout success' });
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: 'Something went wrong, please try again' });

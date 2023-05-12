@@ -1,26 +1,52 @@
+import useUser from '@/utils/iron/useUser';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function Header() {
+  const { user } = useUser();
+
+  const [navOpen, setNavOpen] = useState<boolean>(false);
+
   return (
     <header className='flex items-center justify-between'>
       <div className='flex items-center gap-4'>
-        <button className='px-3 py-4 h-14 rounded shadow flex items-center justify-center bg-grey-light transition duration-150 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 active:translate-y-[1px] ring-grey-light/50'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            strokeWidth={1.5}
-            stroke='currentColor'
-            className='w-6 h-6'
-          >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              d='M3.75 9h16.5m-16.5 6.75h16.5'
-              className='stroke-blue-dark'
-            />
-          </svg>
+        <button
+          className='px-3 py-4 h-14 rounded shadow flex items-center justify-center bg-grey-light transition duration-150 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 active:translate-y-[1px] ring-grey-light/50'
+          onClick={() => setNavOpen(!navOpen)}
+        >
+          {navOpen ? (
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth={1.5}
+              stroke='currentColor'
+              className='w-6 h-6'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M6 18L18 6M6 6l12 12'
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth={1.5}
+              stroke='currentColor'
+              className='w-6 h-6'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d='M3.75 9h16.5m-16.5 6.75h16.5'
+                className='stroke-blue-dark'
+              />
+            </svg>
+          )}
         </button>
         <Link
           href='/'
@@ -42,7 +68,7 @@ export default function Header() {
           </svg>
         </Link>
       </div>
-      {/* {user && (
+      {user && (
         <Link href='/profile'>
           {user.picture ? (
             <div className='bg-grey-light w-14 h-14 rounded-full border-2 border-blue-dark'>
@@ -63,7 +89,34 @@ export default function Header() {
             </div>
           )}
         </Link>
-      )} */}
+      )}
+      {navOpen && (
+        <nav
+          className='fixed left-6 border-2 border-grey-light rounded bg-grey-x-light shadow-md'
+          style={{
+            width: 'calc(100vw - 3rem)',
+            height: 'calc(100vh - 7.5rem)',
+            top: '6rem',
+          }}
+        >
+          <ul className='p-6'>
+            {user && (
+              <li>
+                <Link href='/profile' className='nav__link'>
+                  My Profile
+                </Link>
+              </li>
+            )}
+            {user && (
+              <li>
+                <Link href='/api/auth/signout' className='nav__link'>
+                  Logout
+                </Link>
+              </li>
+            )}
+          </ul>
+        </nav>
+      )}
     </header>
   );
 }

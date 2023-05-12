@@ -1,27 +1,19 @@
-import React from 'react';
-
 type FormInputTextProps = {
+  children: JSX.Element;
   labelText: string;
   inputId: string;
-  inputName: string;
-  inputValue?: string;
   optional?: boolean;
-  type: 'text' | 'email' | 'password' | 'number' | 'tel';
-  onChangeEvent: React.ChangeEventHandler<HTMLInputElement>;
 };
 
 export function FormInputText({
+  children,
   labelText,
-  inputId,
-  inputName,
-  inputValue,
   optional,
-  type,
-  onChangeEvent,
+  inputId,
 }: FormInputTextProps) {
   return (
-    <div>
-      <label htmlFor={inputId} className='block mb-2 font-bold text-xs'>
+    <div className=''>
+      <label htmlFor={inputId} className='form__label'>
         {labelText}{' '}
         {optional ? (
           <span className='opacity-30 font-normal ml-1'>(optional)</span>
@@ -29,14 +21,7 @@ export function FormInputText({
           ''
         )}
       </label>
-      <input
-        type={type}
-        name={inputName}
-        id={inputId}
-        value={inputValue}
-        onChange={onChangeEvent}
-        className='block rounded border border-grey-light w-full p-4 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 ring-grey-light/50 bg-grey-light/50'
-      />
+      {children}
     </div>
   );
 }
@@ -58,7 +43,7 @@ export function FormInputTextArea({
 }: FormInputTextAreaProps) {
   return (
     <div>
-      <label htmlFor={inputId} className='block mb-2 font-bold text-xs'>
+      <label htmlFor={inputId} className='form__label'>
         {labelText}{' '}
         {optional ? (
           <span className='opacity-30 font-normal ml-1'>(optional)</span>
@@ -70,7 +55,7 @@ export function FormInputTextArea({
         name={inputName}
         id={inputId}
         value={inputValue}
-        className='block h-32 rounded border border-grey-light w-full p-4 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 ring-grey-light/50 bg-grey-light/50'
+        className='form__input'
       ></textarea>
     </div>
   );
@@ -97,7 +82,7 @@ export function FormInputSelect({
 }: FormInputSelectProps) {
   return (
     <div>
-      <label htmlFor={inputId} className='block mb-2 font-bold text-xs'>
+      <label htmlFor={inputId} className='form__label'>
         {labelText}{' '}
         {optional ? (
           <span className='opacity-30 font-normal ml-1'>(optional)</span>
@@ -109,7 +94,7 @@ export function FormInputSelect({
         <select
           name={inputName}
           id={inputId}
-          className='block rounded border border-grey-light w-full p-4 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 ring-grey-light/50 bg-grey-light/50 appearance-none text-base'
+          className='form__input'
           defaultValue='default'
         >
           <option value='default' disabled>

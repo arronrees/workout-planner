@@ -2,44 +2,74 @@ import { FormButton } from '@/components/form/FormButton';
 import { FormInputText } from '@/components/form/FormInput';
 import DividerLine from '@/components/general/DividerLine';
 import Layout from '@/layout/Layout';
-import useUser from '@/utils/iron/useUser';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 
-type SignUpFormData = {
+type FormInputs = {
   name: string;
   email: string;
   password: string;
 };
 
-export default function NewWorkout() {
-  const { user } = useUser();
+type FormData = {
+  user: {
+    name: string;
+    email: string;
+    password: string;
+  };
+};
 
-  console.log('user:', user);
+export default function SignUp() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const router = useRouter();
 
-  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleFormSubmit: SubmitHandler<FormInputs> = async (data) => {
+    setIsLoading(true);
 
-    const formData: SignUpFormData = {
-      name,
-      email,
-      password,
+    const formData: FormData = {
+      user: {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      },
     };
-
-    console.log(formData);
 
     const res = await fetch('/api/auth/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ user: formData }),
+      body: JSON.stringify(formData),
     });
     const responseData = await res.json();
     console.log(responseData);
+
+    if (!res.ok) {
+      if (responseData.error && typeof responseData.error === 'string') {
+        toast.error(responseData.error);
+        setIsLoading(false);
+        return;
+      }
+    } else {
+      router.push('/');
+      setIsLoading(false);
+      return;
+    }
   };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormInputs>({
+    defaultValues: {
+      name: '',
+      email: '',
+      password: '',
+    },
+  });
 
   return (
     <Layout>
@@ -61,33 +91,64 @@ export default function NewWorkout() {
       <DividerLine small />
 
       <section className='mt-8'>
-        <form className='grid gap-4' onSubmit={handleFormSubmit}>
-          <FormInputText
-            inputId='name'
-            inputName='name'
-            labelText='Name'
-            type='text'
-            inputValue={name}
-            onChangeEvent={(e) => setName(e.target.value)}
-          />
-          <FormInputText
-            inputId='email'
-            inputName='email'
-            labelText='Email'
-            type='email'
-            inputValue={email}
-            onChangeEvent={(e) => setEmail(e.target.value)}
-          />
-          <FormInputText
-            inputId='password'
-            inputName='password'
-            labelText='Password'
-            type='password'
-            inputValue={password}
-            onChangeEvent={(e) => setPassword(e.target.value)}
-          />
+        <form className='grid gap-4' onSubmit={handleSubmit(handleFormSubmit)}>
+          <FormInputText labelText='Name' inputId='name'>
+            <>
+              <input
+                type='text'
+                id='name'
+                {...register('name', { required: 'Name is required' })}
+                className='form__input'
+              />
+              {errors.name?.message && (
+                <p className='form__error'>{errors.name?.message}</p>
+              )}
+            </>
+          </FormInputText>
+          <FormInputText labelText='Email' inputId='email'>
+            <>
+              <input
+                type='email'
+                id='email'
+                {...register('email', {
+                  required: 'Email is required',
+                  pattern: {
+                    value: /\S+@\S+\.\S+/,
+                    message: 'Email is not valid',
+                  },
+                })}
+                className='form__input'
+              />
+              {errors.email?.message && (
+                <p className='form__error'>{errors.email?.message}</p>
+              )}
+            </>
+          </FormInputText>
+          <FormInputText labelText='Password' inputId='password'>
+            <>
+              <input
+                type='password'
+                id='password'
+                {...register('password', {
+                  required: 'Password is required',
+                  minLength: {
+                    value: 5,
+                    message: 'Password must be at least 5 characters',
+                  },
+                })}
+                className='form__input'
+              />
+              {errors.password?.message && (
+                <p className='form__error'>{errors.password?.message}</p>
+              )}
+            </>
+          </FormInputText>
 
-          <FormButton text='Sign Up' btnClass='btn--green' />
+          <FormButton
+            text='Sign Up'
+            btnClass='btn--green'
+            disabled={isLoading}
+          />
         </form>
       </section>
     </Layout>

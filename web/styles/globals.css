@@ -22,7 +22,7 @@ img {
 }
 
 .btn {
-  @apply px-8 py-4 block rounded shadow text-center text-sm font-semibold active:translate-y-[1px] transition duration-200 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2;
+  @apply px-8 py-4 block rounded shadow text-center text-sm font-semibold active:translate-y-[1px] transition duration-200 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 disabled:cursor-wait disabled:bg-grey-light disabled:hover:bg-grey-light disabled:focus:bg-grey-light disabled:text-grey disabled:hover:text-grey disabled:focus:text-grey;
 }
 
 .btn--green {
@@ -43,4 +43,17 @@ img {
 
 .btn--secondary {
   @apply font-extralight text-xl flex items-center justify-between;
+}
+
+/* form */
+.form__input {
+  @apply block rounded border border-grey-light w-full p-4 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 ring-grey-light/50 bg-grey-light/50;
+}
+
+.form__label {
+  @apply block mb-2 font-bold text-xs;
+}
+
+.form__error {
+  @apply text-red-x-dark text-xs mt-2 ml-2 font-normal;
 }

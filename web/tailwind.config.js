@@ -12,6 +12,9 @@ module.exports = {
       },
     },
     colors: {
+      white: {
+        DEFAULT: '#fff',
+      },
       blue: {
         dark: {
           'x-dark': '#D9E3EF',

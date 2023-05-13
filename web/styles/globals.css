@@ -62,3 +62,8 @@ img {
 .nav__link {
   @apply py-4 block border-b border-grey-light uppercase tracking-widest hover:text-grey focus:text-grey transition duration-150;
 }
+
+/* profile */
+.profile__nav__link {
+  @apply p-3 bg-grey-x-light rounded flex items-center gap-2 hover:bg-grey-light focus:bg-grey-light hover:shadow transition duration-150;
+}

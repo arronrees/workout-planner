@@ -1,12 +1,18 @@
+import { User } from '@/constant-types';
 import Layout from '@/layout/Layout';
+import useUser from '@/utils/iron/useUser';
 import { withSessionSsr } from '@/utils/iron/withSession';
 import Link from 'next/link';
 
 export default function Dashboard() {
+  const { user }: { user: User } = useUser();
+
   return (
     <Layout>
       <div className='mb-6'>
-        <h1 className='font-extralight text-4xl mb-2'>Hello</h1>
+        <h1 className='font-extralight text-4xl mb-2'>
+          Hello, {user && user.name}
+        </h1>
         <p className='font-semibold text-grey'>Let&apos;s get started</p>
       </div>
       <div className='grid gap-3'>

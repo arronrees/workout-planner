@@ -92,7 +92,7 @@ export default function Header() {
       )}
       {navOpen && (
         <nav
-          className='fixed left-6 border-2 border-grey-light rounded bg-grey-x-light shadow-md'
+          className='fixed z-50 left-6 border-2 border-grey-light rounded bg-grey-x-light shadow-md'
           style={{
             width: 'calc(100vw - 3rem)',
             height: 'calc(100vh - 7.5rem)',

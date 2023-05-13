@@ -10,46 +10,20 @@ module.exports = {
       screens: {
         xs: '500px',
       },
-    },
-    colors: {
-      white: {
-        DEFAULT: '#fff',
-      },
-      blue: {
-        dark: {
-          'x-dark': '#D9E3EF',
-          dark: '#DDE6F2',
-          DEFAULT: '#262D3F',
+      colors: {
+        green: {
+          50: '#F2F9E4',
+          100: '#E8F4D8',
+          200: '#D9F0B9',
+          300: '#C8E2A3',
+          400: '#B6CE95',
+          500: '#96AA7B',
+          600: '#798865',
+          700: '#576646',
+          800: '#445135',
+          900: '#2D3524',
+          950: '#1A1F15',
         },
-        light: {
-          'x-dark': '#D9E3EF',
-          dark: '#DDE6F2',
-          DEFAULT: '#E4ECF9',
-        },
-      },
-      green: {
-        'x-dark': '#BCD59E',
-        dark: '#C5DEA5',
-        DEFAULT: '#D0EBAE',
-        light: '#E5F3D3',
-        'x-light': '#F5F8F1',
-      },
-      red: {
-        DEFAULT: '#F5BABA',
-        light: '#FADCDC',
-        'x-light': '#FBEDED',
-        dark: '#EBA4A4',
-        'x-dark': '#DF9D9D',
-      },
-      orange: {
-        'x-dark': '#F0D795',
-        dark: '#F5E0A9',
-        DEFAULT: '#FCEABC',
-      },
-      grey: {
-        DEFAULT: '#868686',
-        light: '#F0F0F0',
-        'x-light': '#F8F8F8',
       },
     },
     fontFamily: {

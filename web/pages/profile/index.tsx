@@ -17,7 +17,7 @@ export default function Profile() {
         <h1 className='font-extralight text-4xl mb-2'>
           Hello, {user && user.name}
         </h1>
-        <p className='font-semibold text-grey'>
+        <p className='font-semibold text-zinc-500'>
           View and update your information
         </p>
       </div>
@@ -31,7 +31,7 @@ export default function Profile() {
         <li>
           <a
             href='/api/auth/signout'
-            className='profile__nav__link text-red-x-dark'
+            className='profile__nav__link text-red-700'
           >
             <ArrowRightOnRectangleIcon className='w-4 h-6' />
             <span>Logout</span>

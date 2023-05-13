@@ -12,7 +12,7 @@ export default function Header() {
     <header className='flex items-center justify-between'>
       <div className='flex items-center gap-4'>
         <button
-          className='px-3 py-4 h-14 rounded shadow flex items-center justify-center bg-grey-light transition duration-150 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 active:translate-y-[1px] ring-grey-light/50'
+          className='px-3 py-4 h-14 rounded shadow flex items-center justify-center bg-zinc-200 transition duration-150 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 active:translate-y-[1px] ring-zinc-200/50'
           onClick={() => setNavOpen(!navOpen)}
         >
           {navOpen ? (
@@ -43,14 +43,14 @@ export default function Header() {
                 strokeLinecap='round'
                 strokeLinejoin='round'
                 d='M3.75 9h16.5m-16.5 6.75h16.5'
-                className='stroke-blue-dark'
+                className='stroke-slate-500'
               />
             </svg>
           )}
         </button>
         <Link
           href='/'
-          className='px-3 py-4 h-14 rounded shadow flex items-center justify-center bg-grey-x-light transition duration-150 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 active:translate-y-[1px] ring-grey-light/50'
+          className='px-3 py-4 h-14 rounded shadow flex items-center justify-center bg-zinc-100 transition duration-150 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 active:translate-y-[1px] ring-zinc-200/50'
         >
           <svg
             xmlns='http://www.w3.org/2000/svg'
@@ -71,7 +71,7 @@ export default function Header() {
       {user && (
         <Link href='/profile'>
           {user.picture ? (
-            <div className='bg-grey-light w-14 h-14 rounded-full border-2 border-blue-dark'>
+            <div className='bg-zinc-200 w-14 h-14 rounded-full border-2 border-slate-500'>
               <figure>
                 <Image
                   src={user.picture}
@@ -84,7 +84,7 @@ export default function Header() {
               </figure>
             </div>
           ) : (
-            <div className='bg-grey-light w-14 h-14 rounded-full border-2 border-blue-dark flex items-center justify-center'>
+            <div className='bg-zinc-200 w-14 h-14 rounded-full border-2 border-slate-500 flex items-center justify-center'>
               <span>{user.name && user.name[0]}</span>
             </div>
           )}
@@ -92,7 +92,7 @@ export default function Header() {
       )}
       {navOpen && (
         <nav
-          className='fixed z-50 left-6 border-2 border-grey-light rounded bg-grey-x-light shadow-md'
+          className='fixed z-50 left-6 border-2 border-zinc-200 rounded bg-zinc-50 shadow-md'
           style={{
             width: 'calc(100vw - 3rem)',
             height: 'calc(100vh - 7.5rem)',

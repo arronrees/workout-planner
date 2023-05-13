@@ -78,7 +78,7 @@ export default function SignIn() {
         <h1 className='font-extralight text-4xl text-center mb-4'>
           Keep on moving
         </h1>
-        <p className='font text-center mb-6 text-grey'>
+        <p className='font text-center mb-6 text-zinc-500'>
           Sign in to keep on reaching your goals
         </p>
         <p className='text-center font-extralight text-sm'>

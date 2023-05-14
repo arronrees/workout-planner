@@ -3,7 +3,7 @@ import { signinUserModel, signupUserModel } from '../models/user.model';
 import { z } from 'zod';
 import { JsonApiResponse } from '../constant-types';
 import { prismaDB } from '..';
-import checkValidUuid from '../utils/index.utils';
+import { isValidUuid } from '../utils/index.utils';
 import jwt from 'jsonwebtoken';
 
 export async function checkUserSignupObjectValid(
@@ -84,7 +84,7 @@ export async function checkJwtExits(
       jwt.verify(token, process.env.JWT_SECRET as string)
     );
 
-    if (!checkValidUuid(id)) {
+    if (!isValidUuid(id)) {
       return res.status(401).json({ success: false, error: 'Invalid token' });
     }
 

@@ -1,5 +1,5 @@
 import { validate as uuidValidate } from 'uuid';
 
-export default function checkValidUuid(id: string) {
+export function isValidUuid(id: string): boolean {
   return uuidValidate(id);
 }

@@ -9,7 +9,7 @@ import {
 import { omit } from 'lodash';
 import emailService from '../services/email.service';
 import randomstring from 'randomstring';
-import checkValidUuid from '../utils/index.utils';
+import { isValidUuid } from '../utils/index.utils';
 import { JsonApiResponse } from '../constant-types';
 
 // POST /signup
@@ -133,7 +133,7 @@ export async function verifyEmailController(
         .json({ success: false, error: 'No ID or token provided' });
     }
 
-    if (!checkValidUuid(id)) {
+    if (!isValidUuid(id)) {
       return res.status(400).json({ success: false, error: 'Invalid ID' });
     }
 

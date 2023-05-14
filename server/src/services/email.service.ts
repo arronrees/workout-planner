@@ -84,7 +84,7 @@ async function sendPasswordResetEmail({
       html: `
         <p>Hi, <b>${name}.</b></p>
         <p>We have received a request to reset your password</p>
-        <p>Please visit this <a href="${process.env.WEB_URL}/user/reset/password/${id}?token=${randomString}" target="_blank" rel="noreferrer">link</a> to reset your password.</p>
+        <p>Please visit this <a href="${process.env.WEB_URL}/user/reset-password/${id}?token=${randomString}" target="_blank" rel="noreferrer">link</a> to reset your password.</p>
       `,
     });
 

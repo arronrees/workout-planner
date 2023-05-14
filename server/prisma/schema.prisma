@@ -19,4 +19,5 @@ model User {
   password                String
   emailVerified           Boolean  @default(false)
   emailVerificationString String?
+  passwordResetString     String?
 }

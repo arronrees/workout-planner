@@ -164,3 +164,46 @@ export async function verifyEmailController(
     next(err);
   }
 }
+
+// POST /password/reset?email=userEmail
+export async function requestPasswordResetController(
+  req: Request,
+  res: Response<JsonApiResponse>,
+  next: NextFunction
+) {
+  try {
+    const { email } = req.query;
+
+    if (!email) {
+      return res.status(404).json({ success: false, error: 'User not found' });
+    }
+
+    const randomString = randomstring.generate();
+
+    const user = await prismaDB.user.update({
+      where: { email: email.toString() },
+      data: {
+        passwordResetString: randomString,
+      },
+    });
+
+    if (!user) {
+      return res.status(404).json({ success: false, error: 'User not found' });
+    }
+
+    res.status(200).json({ success: true });
+
+    const resetPasswordEmail = await emailService.sendPasswordResetEmail({
+      email: user.email,
+      name: user.name,
+      id: user.id,
+      randomString,
+    });
+
+    return;
+  } catch (err) {
+    console.error(err);
+
+    next(err);
+  }
+}

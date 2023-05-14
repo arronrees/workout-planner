@@ -4,6 +4,7 @@ import {
   checkUserSignupObjectValid,
 } from '../middleware/auth.middleware';
 import {
+  requestPasswordResetController,
   signinUserController,
   signupUserController,
   verifyEmailController,
@@ -19,3 +20,6 @@ authRouter.post('/signin', checkUserSigninObjectValid, signinUserController);
 
 // user verify email address
 authRouter.post('/email/verify/:id/:token', verifyEmailController);
+
+// request password reset
+authRouter.post('/password/reset', requestPasswordResetController);

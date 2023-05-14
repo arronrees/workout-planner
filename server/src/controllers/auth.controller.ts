@@ -1,5 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
-import { SigninUserType, SignupUserType } from '../models/user.model';
+import {
+  SigninUserType,
+  SignupUserType,
+  UserPasswordUpdateType,
+} from '../models/user.model';
 import { prismaDB } from '..';
 import {
   comparePassword,
@@ -172,7 +176,7 @@ export async function requestPasswordResetController(
   next: NextFunction
 ) {
   try {
-    const { email } = req.query;
+    const { email }: { email?: string } = req.query;
 
     if (!email) {
       return res.status(404).json({ success: false, error: 'User not found' });
@@ -201,6 +205,67 @@ export async function requestPasswordResetController(
     });
 
     return;
+  } catch (err) {
+    console.error(err);
+
+    next(err);
+  }
+}
+
+// PUT /password/reset/:userId/:token
+export async function resetPasswordController(
+  req: Request,
+  res: Response<JsonApiResponse>,
+  next: NextFunction
+) {
+  try {
+    const { userId, token }: { userId?: string; token?: string } = req.params;
+
+    if (!userId || !token) {
+      return res
+        .status(400)
+        .json({ success: false, error: 'No ID or token provided' });
+    }
+
+    if (!isValidUuid(userId)) {
+      return res.status(400).json({ success: false, error: 'Invalid ID' });
+    }
+
+    const { user }: { user: UserPasswordUpdateType } = req.body;
+
+    const currentUser = await prismaDB.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (currentUser) {
+      if (currentUser.passwordResetString === token) {
+        // compare passwords
+        const passwordCheck = await comparePassword(
+          user.password,
+          currentUser.password
+        );
+
+        if (passwordCheck) {
+          return res.status(400).json({
+            success: false,
+            error: 'New password cannot be the same as current password',
+          });
+        }
+
+        const hash = await hashPassword(user.password);
+
+        await prismaDB.user.update({
+          where: { id: userId },
+          data: { passwordResetString: null, password: hash },
+        });
+
+        return res.status(200).json({ success: true });
+      } else {
+        return res.status(401).json({ success: false, error: 'Invalid token' });
+      }
+    }
+
+    return res.status(404).json({ success: false, error: 'User not found' });
   } catch (err) {
     console.error(err);
 

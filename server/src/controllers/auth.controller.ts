@@ -54,12 +54,12 @@ export async function signupUserController(
     });
 
     // send verification email
-    const verificationEmailMessage = await emailService.sendEmailVerification(
-      newUser.email,
-      newUser.id,
-      newUser.name,
-      randomString
-    );
+    const verificationEmailMessage = await emailService.sendEmailVerification({
+      email: newUser.email,
+      id: newUser.id,
+      name: newUser.name,
+      randomString,
+    });
 
     return;
   } catch (err) {

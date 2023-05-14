@@ -1,11 +1,18 @@
 import { emailTransporter } from '../constants';
 
-async function sendEmailVerification(
-  email: string,
-  id: string,
-  name: string,
-  randomString: string
-) {
+type EmailVerificationEmailType = {
+  email: string;
+  id: string;
+  name: string;
+  randomString: string;
+};
+
+async function sendEmailVerification({
+  email,
+  id,
+  name,
+  randomString,
+}: EmailVerificationEmailType) {
   try {
     const message = await emailTransporter.sendMail({
       from: `"${process.env.SMTP_FROM_NAME}" <${process.env.SMTP_FROM_ADDRESS}>`,
@@ -26,7 +33,15 @@ async function sendEmailVerification(
   }
 }
 
-async function sendPasswordUpdateNotification(email: string, name: string) {
+type PasswordNotificationEmailType = {
+  email: string;
+  name: string;
+};
+
+async function sendPasswordUpdateNotification({
+  email,
+  name,
+}: PasswordNotificationEmailType) {
   try {
     const message = await emailTransporter.sendMail({
       from: `"${process.env.SMTP_FROM_NAME}" <${process.env.SMTP_FROM_ADDRESS}>`,

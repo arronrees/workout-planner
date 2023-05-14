@@ -45,10 +45,10 @@ export async function updateUserPasswordController(
 
     // send email notification
     const passwordNotificationMessage =
-      await emailService.sendPasswordUpdateNotification(
-        currentUser.email,
-        currentUser.name
-      );
+      await emailService.sendPasswordUpdateNotification({
+        email: currentUser.email,
+        name: currentUser.name,
+      });
 
     return;
   } catch (err) {

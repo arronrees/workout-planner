@@ -1,27 +1,19 @@
 import { FormButton } from '@/components/form/FormButton';
 import { FormInputText } from '@/components/form/FormInput';
 import DividerLine from '@/components/general/DividerLine';
+import { API_URL } from '@/constants';
 import Layout from '@/layout/Layout';
 import { withSessionSsr } from '@/utils/iron/withSession';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
 type FormInputs = {
   email: string;
-  password: string;
 };
 
-type FormData = {
-  user: {
-    email: string;
-    password: string;
-  };
-};
-
-export default function SignIn() {
+export default function UpdatePassword() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const router = useRouter();
@@ -29,31 +21,25 @@ export default function SignIn() {
   const handleFormSubmit: SubmitHandler<FormInputs> = async (data) => {
     setIsLoading(true);
 
-    const formData: FormData = {
-      user: {
-        email: data.email,
-        password: data.password,
-      },
-    };
-
-    const res = await fetch('/api/auth/signin', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    });
+    const res = await fetch(
+      `${API_URL}/api/auth/password/reset?email=${data.email}`,
+      { method: 'POST' }
+    );
     const responseData = await res.json();
 
     if (!res.ok) {
       if (responseData.error && typeof responseData.error === 'string') {
         toast.error(responseData.error);
+      } else {
+        toast.error(
+          'There was a problem requesting your password reset, please try again.'
+        );
       }
 
       setIsLoading(false);
       return;
     } else {
-      if (responseData.data?.name) {
-        toast.success(`Welcome, ${responseData.data.name}`);
-      }
+      toast.success('You will receive an email shortly');
 
       setIsLoading(false);
       router.push('/');
@@ -68,30 +54,22 @@ export default function SignIn() {
   } = useForm<FormInputs>({
     defaultValues: {
       email: '',
-      password: '',
     },
   });
 
   return (
     <Layout userNotRequired>
       <section>
-        <h1 className='font-extralight text-4xl text-center mb-4'>
-          Keep on moving
-        </h1>
-        <p className='font text-center mb-6 text-zinc-500'>
-          Sign in to keep on reaching your goals
-        </p>
-        <p className='text-center font-extralight text-sm'>
-          Need have an account?{' '}
-          <Link href='/auth/signup' className='font-semibold'>
-            Sign Up
-          </Link>
+        <h1 className='font-semibold text-2xl mb-2'>Forgotten Password?</h1>
+        <p className='font-light text-sm text-zinc-500'>
+          Enter your email below and you will receive an email with instructions
+          on how to reset your password.
         </p>
       </section>
 
-      <DividerLine small />
+      <DividerLine />
 
-      <section className='mt-8'>
+      <section>
         <form className='grid gap-4' onSubmit={handleSubmit(handleFormSubmit)}>
           <FormInputText labelText='Email' inputId='email'>
             <>
@@ -100,10 +78,6 @@ export default function SignIn() {
                 id='email'
                 {...register('email', {
                   required: 'Email is required',
-                  pattern: {
-                    value: /\S+@\S+\.\S+/,
-                    message: 'Email is not valid',
-                  },
                 })}
                 className='form__input'
               />
@@ -112,35 +86,13 @@ export default function SignIn() {
               )}
             </>
           </FormInputText>
-          <FormInputText labelText='Password' inputId='password'>
-            <>
-              <input
-                type='password'
-                id='password'
-                {...register('password', {
-                  required: 'Password is required',
-                })}
-                className='form__input'
-              />
-              {errors.password?.message && (
-                <p className='form__error'>{errors.password?.message}</p>
-              )}
-            </>
-          </FormInputText>
 
           <FormButton
-            text='Sign In'
+            text='Request Password Reset'
             btnClass='btn--green'
             disabled={isLoading}
           />
         </form>
-
-        <Link
-          href='/user/reset-password/request'
-          className='block text-center font-semibold text-zinc-400 text-sm mt-6 hover:text-zinc-500 focus:text-zinc-500'
-        >
-          Forgot your password?
-        </Link>
       </section>
     </Layout>
   );

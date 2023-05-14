@@ -182,6 +182,13 @@ export async function requestPasswordResetController(
       return res.status(404).json({ success: false, error: 'User not found' });
     }
 
+    const isUser = await prismaDB.user.findUnique({ where: { email } });
+
+    // send a good response to not notify users if account exists
+    if (!isUser) {
+      return res.status(200).json({ success: false });
+    }
+
     const randomString = randomstring.generate();
 
     const user = await prismaDB.user.update({

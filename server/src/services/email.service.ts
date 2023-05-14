@@ -26,8 +26,30 @@ async function sendEmailVerification(
   }
 }
 
+async function sendPasswordUpdateNotification(email: string, name: string) {
+  try {
+    const message = await emailTransporter.sendMail({
+      from: `"${process.env.SMTP_FROM_NAME}" <${process.env.SMTP_FROM_ADDRESS}>`,
+      to: email,
+      subject: `${process.env.SITE_NAME} - Password Updated`,
+      text: 'Your password has been updated.',
+      html: `
+        <p>Hi, <b>${name}.</b></p>
+        <p>Your password has been updated.</p>
+      `,
+    });
+
+    return message;
+  } catch (err) {
+    console.error(err);
+
+    return null;
+  }
+}
+
 const emailService = {
   sendEmailVerification,
+  sendPasswordUpdateNotification,
 };
 
 export default emailService;

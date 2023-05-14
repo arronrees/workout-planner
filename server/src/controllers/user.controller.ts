@@ -3,6 +3,7 @@ import { JsonApiResponse, ResLocals } from '../constant-types';
 import { UserPasswordUpdateType } from '../models/user.model';
 import { comparePassword, hashPassword } from '../utils/auth.utils';
 import { prismaDB } from '..';
+import emailService from '../services/email.service';
 
 // PUT /update/password
 export async function updateUserPasswordController(
@@ -40,7 +41,16 @@ export async function updateUserPasswordController(
       },
     });
 
-    return res.status(200).json({ success: true });
+    res.status(200).json({ success: true });
+
+    // send email notification
+    const passwordNotificationMessage =
+      await emailService.sendPasswordUpdateNotification(
+        currentUser.email,
+        currentUser.name
+      );
+
+    return;
   } catch (err) {
     console.error(err);
 

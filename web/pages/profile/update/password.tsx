@@ -1,7 +1,6 @@
 import { FormButton } from '@/components/form/FormButton';
 import { FormInputText } from '@/components/form/FormInput';
 import DividerLine from '@/components/general/DividerLine';
-import { User } from '@/constant-types';
 import { API_URL } from '@/constants';
 import Layout from '@/layout/Layout';
 import useUser from '@/utils/iron/useUser';
@@ -10,7 +9,6 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { HashLoader } from 'react-spinners';
 
 type FormInputs = {
   password: string;

@@ -70,7 +70,7 @@ export default function UpdatePassword() {
       <DividerLine />
 
       <section>
-        <form className='grid gap-4' onSubmit={handleSubmit(handleFormSubmit)}>
+        <form className='form__grid' onSubmit={handleSubmit(handleFormSubmit)}>
           <FormInputText labelText='Email' inputId='email'>
             <>
               <input

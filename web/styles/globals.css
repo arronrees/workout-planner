@@ -22,7 +22,7 @@ img {
 }
 
 .btn {
-  @apply px-8 py-4 block rounded shadow text-center text-sm font-semibold active:translate-y-[1px] transition duration-200 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 disabled:cursor-wait disabled:bg-zinc-200 disabled:hover:bg-zinc-200 disabled:focus:bg-zinc-200 disabled:text-zinc-500 disabled:hover:text-zinc-500 disabled:focus:text-zinc-500;
+  @apply px-4 py-3 block rounded shadow text-center text-xs font-semibold active:translate-y-[1px] transition duration-200 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 disabled:cursor-wait disabled:bg-zinc-200 disabled:hover:bg-zinc-200 disabled:focus:bg-zinc-200 disabled:text-zinc-500 disabled:hover:text-zinc-500 disabled:focus:text-zinc-500;
 }
 
 .btn--green {
@@ -47,7 +47,7 @@ img {
 
 /* form */
 .form__input {
-  @apply block rounded border border-zinc-200 w-full p-4 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 ring-zinc-200/50 bg-zinc-200/50;
+  @apply block rounded border border-zinc-200 w-full py-3 px-4 text-xs focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 ring-zinc-200/50 bg-zinc-200/50;
 }
 
 .form__label {
@@ -65,5 +65,10 @@ img {
 
 /* profile */
 .profile__nav__link {
-  @apply p-3 bg-zinc-100 rounded border border-zinc-200 flex items-center gap-2 hover:bg-zinc-200 focus:bg-zinc-200 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 ring-zinc-200/50 bg-zinc-200/50 hover:shadow transition duration-150;
+  @apply p-3 bg-zinc-100 rounded border border-zinc-200 text-sm flex items-center gap-2 hover:bg-zinc-200 focus:bg-zinc-200 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 ring-zinc-200/50 bg-zinc-200/50 hover:shadow transition duration-150;
+}
+
+/* form */
+.form__grid {
+  @apply grid gap-3;
 }

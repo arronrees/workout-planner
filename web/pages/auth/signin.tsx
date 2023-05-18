@@ -92,7 +92,7 @@ export default function SignIn() {
       <DividerLine small />
 
       <section className='mt-8'>
-        <form className='grid gap-4' onSubmit={handleSubmit(handleFormSubmit)}>
+        <form className='form__grid' onSubmit={handleSubmit(handleFormSubmit)}>
           <FormInputText labelText='Email' inputId='email'>
             <>
               <input

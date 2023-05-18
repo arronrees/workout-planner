@@ -5,7 +5,8 @@ import { withSessionSsr } from '@/utils/iron/withSession';
 import {
   ArrowRightOnRectangleIcon,
   LockClosedIcon,
-} from '@heroicons/react/24/solid';
+  UserIcon,
+} from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
 export default function Profile() {
@@ -21,7 +22,13 @@ export default function Profile() {
           View and update your information
         </p>
       </div>
-      <ul className='grid gap-4'>
+      <ul className='grid gap-2'>
+        <li>
+          <Link href='/profile/update/details' className='profile__nav__link'>
+            <UserIcon className='w-4 h-6' />
+            <span>Update My Details</span>
+          </Link>
+        </li>
         <li>
           <Link href='/profile/update/password' className='profile__nav__link'>
             <LockClosedIcon className='w-4 h-6' />

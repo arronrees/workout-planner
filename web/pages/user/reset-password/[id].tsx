@@ -93,7 +93,7 @@ export default function UpdatePassword({ id, token }: Props) {
       <DividerLine />
 
       <section>
-        <form className='grid gap-4' onSubmit={handleSubmit(handleFormSubmit)}>
+        <form className='form__grid' onSubmit={handleSubmit(handleFormSubmit)}>
           <FormInputText labelText='New Password' inputId='password'>
             <>
               <input

@@ -81,7 +81,7 @@ export default function SignIn() {
         <p className='font text-center mb-6 text-zinc-500'>
           Sign in to keep on reaching your goals
         </p>
-        <p className='text-center font-extralight text-sm'>
+        <p className='text-center font-extralight text-xs'>
           Need have an account?{' '}
           <Link href='/auth/signup' className='font-semibold'>
             Sign Up
@@ -91,7 +91,7 @@ export default function SignIn() {
 
       <DividerLine small />
 
-      <section className='mt-8'>
+      <section className='mt-6'>
         <form className='form__grid' onSubmit={handleSubmit(handleFormSubmit)}>
           <FormInputText labelText='Email' inputId='email'>
             <>
@@ -137,7 +137,7 @@ export default function SignIn() {
 
         <Link
           href='/user/reset-password/request'
-          className='block text-center font-semibold text-zinc-400 text-sm mt-6 hover:text-zinc-500 focus:text-zinc-500'
+          className='block text-center font-semibold text-zinc-400 text-xs mt-6 hover:text-zinc-500 focus:text-zinc-500'
         >
           Forgot your password?
         </Link>

@@ -27,7 +27,7 @@ export default function Home() {
         <a href='/auth/signup' className='btn btn--green'>
           Register Now
         </a>
-        <p className='text-center font-extralight text-sm mt-6'>
+        <p className='text-center font-extralight text-xs mt-6'>
           Already have an account?{' '}
           <Link href='/auth/signin' className='font-semibold'>
             Sign In

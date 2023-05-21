@@ -85,7 +85,7 @@ export default function SignUp() {
         <p className='font text-center mb-6 text-zinc-500'>
           Sign up to get started tracking your workouts and reaching your goals
         </p>
-        <p className='text-center font-extralight text-sm'>
+        <p className='text-center font-extralight text-xs'>
           Already have an account?{' '}
           <Link href='/auth/signin' className='font-semibold'>
             Sign In
@@ -95,7 +95,7 @@ export default function SignUp() {
 
       <DividerLine small />
 
-      <section className='mt-8'>
+      <section className='mt-6'>
         <form className='form__grid' onSubmit={handleSubmit(handleFormSubmit)}>
           <FormInputText labelText='Name' inputId='name'>
             <>

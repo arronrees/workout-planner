@@ -1,18 +1,15 @@
 import { useEffect } from 'react';
 import Router from 'next/router';
 import useSWR from 'swr';
+import { User } from '@/constant-types';
 
 export default function useUser({
   redirectTo = '',
   redirectIfFound = false,
-} = {}) {
+} = {}): { user: User | null | undefined; isLoading: boolean } {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-  const {
-    data: user,
-    mutate: mutateUser,
-    isLoading,
-  } = useSWR('/api/user/find', fetcher);
+  const { data: user, isLoading } = useSWR('/api/user/find', fetcher);
 
   useEffect(() => {
     // if no redirect needed, just return (example: already on /dashboard)
@@ -29,5 +26,5 @@ export default function useUser({
     }
   }, [user, redirectIfFound, redirectTo]);
 
-  return { user, mutateUser, isLoading };
+  return { user, isLoading };
 }

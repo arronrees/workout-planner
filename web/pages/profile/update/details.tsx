@@ -1,9 +1,9 @@
 import { FormButton } from '@/components/form/FormButton';
 import { FormInputText } from '@/components/form/FormInput';
 import DividerLine from '@/components/general/DividerLine';
+import { User } from '@/constant-types';
 import { API_URL } from '@/constants';
 import Layout from '@/layout/Layout';
-import useUser from '@/utils/iron/useUser';
 import { withSessionSsr } from '@/utils/iron/withSession';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -11,20 +11,22 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
 type FormInputs = {
-  password: string;
-  passwordConfirmation: string;
+  name: string;
+  email: string;
 };
 
 type FormData = {
   user: {
-    password: string;
-    passwordConfirmation: string;
+    name: string;
+    email: string;
   };
 };
 
-export default function UpdatePassword() {
-  const { user, isLoading: isUserLoading } = useUser();
+type PageProps = {
+  user: User;
+};
 
+export default function UpdateMyDetails({ user }: PageProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const router = useRouter();
@@ -34,12 +36,12 @@ export default function UpdatePassword() {
 
     const formData: FormData = {
       user: {
-        password: data.password,
-        passwordConfirmation: data.passwordConfirmation,
+        name: data.name,
+        email: data.email,
       },
     };
 
-    const res = await fetch(`${API_URL}/api/user/update/password`, {
+    const res = await fetch(`${API_URL}/api/user/update/details`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -53,13 +55,13 @@ export default function UpdatePassword() {
       if (responseData.error && typeof responseData.error === 'string') {
         toast.error(responseData.error);
       } else {
-        toast.error('Could not update password, please try again.');
+        toast.error('Could not update details, please try again.');
       }
 
       setIsLoading(false);
       return;
     } else {
-      toast.success('Updated password successfully');
+      toast.success('Updated details successfully');
 
       setIsLoading(false);
       router.push('/profile');
@@ -70,72 +72,62 @@ export default function UpdatePassword() {
   const {
     register,
     handleSubmit,
-    getValues,
     formState: { errors },
   } = useForm<FormInputs>({
     defaultValues: {
-      password: '',
-      passwordConfirmation: '',
+      name: user.name,
+      email: user.email,
     },
   });
 
   return (
     <Layout>
       <section>
-        <h1 className='font-semibold text-2xl mb-2'>Update password</h1>
-        <p className='font-light text-sm text-zinc-500'>
-          Update your password to something new
-        </p>
+        <h1 className='font-semibold text-2xl mb-2'>Update My Details</h1>
+        <p className='font-light text-sm text-zinc-500'>Update your details</p>
       </section>
 
       <DividerLine />
 
       <section>
         <form className='form__grid' onSubmit={handleSubmit(handleFormSubmit)}>
-          <FormInputText labelText='New Password' inputId='password'>
+          <FormInputText labelText='Name' inputId='name'>
             <>
               <input
-                type='password'
-                id='password'
-                {...register('password', {
-                  required: 'Password is required',
-                  minLength: {
-                    value: 5,
-                    message: 'Password must be at least 5 characters',
-                  },
+                type='text'
+                id='name'
+                {...register('name', {
+                  required: 'Name is required',
                 })}
                 className='form__input'
               />
-              {errors.password?.message && (
-                <p className='form__error'>{errors.password?.message}</p>
+              {errors.name?.message && (
+                <p className='form__error'>{errors.name?.message}</p>
               )}
             </>
           </FormInputText>
           <FormInputText
-            labelText='New Password Confirmation'
-            inputId='passwordConfirmation'
+            labelText='Email'
+            inputId='email'
+            infoText='You will have to re-verify your email address if you change this'
           >
             <>
               <input
-                type='password'
-                id='passwordConfirmation'
-                {...register('passwordConfirmation', {
-                  required: 'Password Confirmation is required',
-                  validate: (value) =>
-                    value === getValues('password') || 'Passwords do not match',
+                type='email'
+                id='email'
+                {...register('email', {
+                  required: 'Email is required',
                 })}
                 className='form__input'
               />
-              {errors.passwordConfirmation?.message && (
-                <p className='form__error'>
-                  {errors.passwordConfirmation?.message}
-                </p>
+              {errors.email?.message && (
+                <p className='form__error'>{errors.email?.message}</p>
               )}
             </>
           </FormInputText>
 
           <FormButton
-            text='Update Password'
+            text='Update Details'
             btnClass='btn--green'
             disabled={isLoading}
           />
@@ -158,7 +150,7 @@ export const getServerSideProps = withSessionSsr(
       };
     } else {
       return {
-        props: {},
+        props: { user },
       };
     }
   }

@@ -5,6 +5,7 @@ type FormInputTextProps = {
   labelText: string;
   inputId: string;
   optional?: boolean;
+  infoText?: string;
 };
 
 export function FormInputText({
@@ -12,6 +13,7 @@ export function FormInputText({
   labelText,
   optional,
   inputId,
+  infoText,
 }: FormInputTextProps) {
   return (
     <div className=''>
@@ -23,6 +25,9 @@ export function FormInputText({
           ''
         )}
       </label>
+      {infoText && (
+        <span className='block opacity-50 text-xs mb-1'>{infoText}</span>
+      )}
       {children}
     </div>
   );

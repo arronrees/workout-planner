@@ -5,7 +5,7 @@ import { withSessionSsr } from '@/utils/iron/withSession';
 import Link from 'next/link';
 
 export default function Dashboard() {
-  const { user }: { user: User } = useUser();
+  const { user } = useUser();
 
   return (
     <Layout>

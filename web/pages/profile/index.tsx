@@ -1,6 +1,5 @@
 import { User } from '@/constant-types';
 import Layout from '@/layout/Layout';
-import useUser from '@/utils/iron/useUser';
 import { withSessionSsr } from '@/utils/iron/withSession';
 import {
   ArrowRightOnRectangleIcon,
@@ -9,9 +8,11 @@ import {
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
-export default function Profile() {
-  const { user } = useUser();
+type PageProps = {
+  user: User;
+};
 
+export default function Profile({ user }: PageProps) {
   return (
     <Layout>
       <div className='mb-6'>
@@ -62,7 +63,7 @@ export const getServerSideProps = withSessionSsr(
       };
     } else {
       return {
-        props: {},
+        props: { user },
       };
     }
   }

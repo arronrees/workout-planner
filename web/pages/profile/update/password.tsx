@@ -4,7 +4,6 @@ import DividerLine from '@/components/general/DividerLine';
 import { User } from '@/constant-types';
 import { API_URL } from '@/constants';
 import Layout from '@/layout/Layout';
-import useUser from '@/utils/iron/useUser';
 import { withSessionSsr } from '@/utils/iron/withSession';
 import { useRouter } from 'next/router';
 import { useState } from 'react';

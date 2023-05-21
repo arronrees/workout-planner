@@ -18,7 +18,6 @@ async function sendEmailVerification({
       from: `"${process.env.SMTP_FROM_NAME}" <${process.env.SMTP_FROM_ADDRESS}>`,
       to: email,
       subject: `${process.env.SITE_NAME} - Verify your email address`,
-      text: 'Please verify your email address',
       html: `
         <p>Hi, <b>${name}.</b> Thanks for joining.</p>
         <p>Please visit this <a href="${process.env.WEB_URL}/user/verify-email/${id}/${randomString}" target="_blank" rel="noreferrer">link</a> to verify your email address</p>
@@ -47,7 +46,6 @@ async function sendPasswordUpdateNotification({
       from: `"${process.env.SMTP_FROM_NAME}" <${process.env.SMTP_FROM_ADDRESS}>`,
       to: email,
       subject: `${process.env.SITE_NAME} - Password Updated`,
-      text: 'Your password has been updated.',
       html: `
         <p>Hi, <b>${name}.</b></p>
         <p>Your password has been updated.</p>
@@ -79,8 +77,7 @@ async function sendPasswordResetEmail({
     const message = await emailTransporter.sendMail({
       from: `"${process.env.SMTP_FROM_NAME}" <${process.env.SMTP_FROM_ADDRESS}>`,
       to: email,
-      subject: `${process.env.SITE_NAME} - Verify your email address`,
-      text: 'Please verify your email address',
+      subject: `${process.env.SITE_NAME} - Reset Your Password`,
       html: `
         <p>Hi, <b>${name}.</b></p>
         <p>We have received a request to reset your password</p>

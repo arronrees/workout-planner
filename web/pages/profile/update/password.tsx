@@ -1,6 +1,7 @@
 import { FormButton } from '@/components/form/FormButton';
 import { FormInputText } from '@/components/form/FormInput';
 import DividerLine from '@/components/general/DividerLine';
+import { User } from '@/constant-types';
 import { API_URL } from '@/constants';
 import Layout from '@/layout/Layout';
 import useUser from '@/utils/iron/useUser';
@@ -22,9 +23,11 @@ type FormData = {
   };
 };
 
-export default function UpdatePassword() {
-  const { user, isLoading: isUserLoading } = useUser();
+type PageProps = {
+  user: User;
+};
 
+export default function UpdatePassword({ user }: PageProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const router = useRouter();
@@ -167,7 +170,7 @@ export const getServerSideProps = withSessionSsr(
       };
     } else {
       return {
-        props: {},
+        props: { user },
       };
     }
   }

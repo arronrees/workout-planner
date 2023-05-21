@@ -26,12 +26,10 @@ export async function getSingleUserController(
       return res.status(401).json({ success: false, error: 'Invalid user' });
     }
 
-    return res
-      .status(200)
-      .json({
-        success: true,
-        data: omit({ ...user, token }, userDataToOmitFromResponse),
-      });
+    return res.status(200).json({
+      success: true,
+      data: omit({ ...user, token }, userDataToOmitFromResponse),
+    });
   } catch (err) {
     console.error(err);
 
@@ -109,14 +107,16 @@ export async function updateUserDetailsController(
     // is email new?
     const isEmailNew: boolean = user.email !== currentUser.email;
 
-    const isEmailRegistered = await prismaDB.user.findUnique({
-      where: { email: user.email },
-    });
+    if (isEmailNew) {
+      const isEmailRegistered = await prismaDB.user.findUnique({
+        where: { email: user.email },
+      });
 
-    if (isEmailRegistered) {
-      return res
-        .status(400)
-        .json({ success: false, error: 'Email already registered' });
+      if (isEmailRegistered) {
+        return res
+          .status(400)
+          .json({ success: false, error: 'Email already registered' });
+      }
     }
 
     const randomString = randomstring.generate();

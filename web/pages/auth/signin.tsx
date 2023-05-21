@@ -136,7 +136,7 @@ export default function SignIn() {
         </form>
 
         <Link
-          href='/user/reset-password/request'
+          href='/auth/user/reset-password/request'
           className='block text-center font-semibold text-zinc-400 text-xs mt-6 hover:text-zinc-500 focus:text-zinc-500'
         >
           Forgot your password?

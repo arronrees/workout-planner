@@ -61,8 +61,17 @@ export default function UpdateMyDetails({ user }: PageProps) {
       setIsLoading(false);
       return;
     } else {
-      toast.success('Updated details successfully');
+      // update user session
+      const userRes = await fetch('/api/user/update');
+      const userData = await userRes.json();
 
+      if (!userRes.ok) {
+        setIsLoading(false);
+        toast.error(userData.error);
+        return;
+      }
+
+      toast.success('User details updated successfully');
       setIsLoading(false);
       router.push('/profile');
       return;

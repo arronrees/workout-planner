@@ -59,8 +59,17 @@ export default function UpdatePassword() {
       setIsLoading(false);
       return;
     } else {
-      toast.success('Updated password successfully');
+      // update user session
+      const userRes = await fetch('/api/user/update');
+      const userData = await userRes.json();
 
+      if (!userRes.ok) {
+        setIsLoading(false);
+        toast.error(userData.error);
+        return;
+      }
+
+      toast.success('Updated password successfully');
       setIsLoading(false);
       router.push('/profile');
       return;

@@ -8,6 +8,36 @@ import { comparePassword, hashPassword } from '../utils/auth.utils';
 import { prismaDB } from '..';
 import emailService from '../services/email.service';
 import randomstring from 'randomstring';
+import { omit } from 'lodash';
+import { userDataToOmitFromResponse } from '../constants';
+
+// GET /find/:userId
+export async function getSingleUserController(
+  req: Request,
+  res: Response<JsonApiResponse> & { locals: ResLocals },
+  next: NextFunction
+) {
+  try {
+    const { userId }: { userId?: string } = req.params;
+
+    const { user, userToken: token } = res.locals;
+
+    if (userId !== user.id) {
+      return res.status(401).json({ success: false, error: 'Invalid user' });
+    }
+
+    return res
+      .status(200)
+      .json({
+        success: true,
+        data: omit({ ...user, token }, userDataToOmitFromResponse),
+      });
+  } catch (err) {
+    console.error(err);
+
+    next(err);
+  }
+}
 
 // PUT /update/password
 export async function updateUserPasswordController(

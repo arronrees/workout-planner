@@ -9,3 +9,8 @@ export const emailTransporter = createTransport({
     pass: process.env.SMTP_PASS,
   },
 });
+
+export const userDataToOmitFromResponse: string[] = [
+  'password',
+  'emailVerificationString',
+];

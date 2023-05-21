@@ -65,7 +65,7 @@ img {
 
 /* profile */
 .profile__nav__link {
-  @apply p-3 bg-zinc-100 rounded border border-zinc-200 text-sm flex items-center gap-2 hover:bg-zinc-200 focus:bg-zinc-200 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 ring-zinc-200/50 bg-zinc-200/50 hover:shadow transition duration-150;
+  @apply p-2 bg-zinc-100 rounded border border-zinc-200 text-sm flex items-center gap-2 hover:bg-zinc-200 focus:bg-zinc-200 focus:outline-none ring-offset-2 focus:ring-2 active:ring-2 ring-zinc-200/50 bg-zinc-200/50 hover:shadow transition duration-150;
 }
 
 /* form */

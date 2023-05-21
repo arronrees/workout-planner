@@ -4,11 +4,15 @@ import {
   checkUserPasswordUpdateObjectValid,
 } from '../middleware/user.middleware';
 import {
+  getSingleUserController,
   updateUserDetailsController,
   updateUserPasswordController,
 } from '../controllers/user.controller';
 
 export const userRouter = Router();
+
+// get single user
+userRouter.get('/find/:userId', getSingleUserController);
 
 // update user password
 userRouter.put(

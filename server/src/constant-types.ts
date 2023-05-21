@@ -8,4 +8,5 @@ export type JsonApiResponse = {
 
 export type ResLocals = {
   user: User;
+  userToken: string;
 };

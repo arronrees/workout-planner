@@ -36,6 +36,7 @@ export default function Profile({ user }: PageProps) {
             <span>Update Password</span>
           </Link>
         </li>
+        <span className='block w-11/12 mx-auto bg-zinc-100 h-[1px]'></span>
         <li>
           <a
             href='/api/auth/signout'

@@ -7,7 +7,9 @@ import {
   getSingleUserController,
   updateUserDetailsController,
   updateUserPasswordController,
+  updateUserProfileImageController,
 } from '../controllers/user.controller';
+import { multerUpload } from '../constants';
 
 export const userRouter = Router();
 
@@ -21,8 +23,16 @@ userRouter.put(
   updateUserPasswordController
 );
 
+// update user details
 userRouter.put(
   '/update/details',
   checkUserDetailsUpdteObjectValid,
   updateUserDetailsController
+);
+
+// update user profile image
+userRouter.post(
+  '/update/image',
+  multerUpload.single('profileImageFile'),
+  updateUserProfileImageController
 );

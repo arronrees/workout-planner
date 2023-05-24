@@ -10,6 +10,10 @@ import emailService from '../services/email.service';
 import randomstring from 'randomstring';
 import { omit } from 'lodash';
 import { userDataToOmitFromResponse } from '../constants';
+import path from 'path';
+import fs from 'fs';
+import sharp from 'sharp';
+import { v4 as uuidV4 } from 'uuid';
 
 // GET /find/:userId
 export async function getSingleUserController(
@@ -142,6 +146,53 @@ export async function updateUserDetailsController(
     });
 
     return;
+  } catch (err) {
+    console.error(err);
+
+    next(err);
+  }
+}
+
+// POST /update/image
+export async function updateUserProfileImageController(
+  req: Request,
+  res: Response<JsonApiResponse> & { locals: ResLocals },
+  next: NextFunction
+) {
+  try {
+    const { user } = res.locals;
+
+    if (!req.file) {
+      return res
+        .status(400)
+        .json({ success: false, error: 'No file uploaded' });
+    }
+
+    const { filename } = req.file;
+
+    const inputImg = fs.readFileSync(
+      path.join(__dirname, `../uploads/temp/${filename}`)
+    );
+
+    const outputImgDest = 'img/users/profilephoto';
+    const outPutImgFilename = `${uuidV4()}-${Date.now()}.webp`;
+
+    const outputImg = await sharp(inputImg)
+      .resize({ width: 400, withoutEnlargement: true })
+      .toFile(
+        path.join(__dirname, `../uploads/${outputImgDest}/${outPutImgFilename}`)
+      );
+
+    const removedImg = fs.unlinkSync(
+      path.join(__dirname, `../uploads/temp/${filename}`)
+    );
+
+    const updatedUser = await prismaDB.user.update({
+      where: { id: user.id },
+      data: { image: `${outputImgDest}/${outPutImgFilename}` },
+    });
+
+    return res.status(200).json({ success: true });
   } catch (err) {
     console.error(err);
 

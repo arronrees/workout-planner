@@ -1,3 +1,4 @@
+import { API_URL } from '@/constants';
 import useUser from '@/utils/iron/useUser';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -70,11 +71,11 @@ export default function Header() {
       </div>
       {user && (
         <Link href='/profile'>
-          {user.picture ? (
+          {user.image ? (
             <div className='bg-zinc-200 w-14 h-14 rounded-full border-2 border-slate-500'>
               <figure>
                 <Image
-                  src={user.picture}
+                  src={`${API_URL}/${user.image}`}
                   alt=''
                   width={56}
                   height={56}

@@ -7,6 +7,7 @@ import cors from 'cors';
 import { authRouter } from './routes/auth.routes';
 import { userRouter } from './routes/user.routes';
 import { checkJwtExits } from './middleware/auth.middleware';
+import path from 'path';
 
 export const prismaDB = new PrismaClient({
   errorFormat: 'pretty',
@@ -20,6 +21,9 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(morgan('dev'));
+
+// static files
+app.use(express.static(path.join(__dirname, 'uploads')));
 
 // reset user on locals
 app.use((req: Request, res: Response, next: NextFunction) => {

@@ -6,5 +6,5 @@ export type User = {
   email: string;
   emailVerified: boolean;
   token: string;
-  image: string;
+  image?: string;
 };

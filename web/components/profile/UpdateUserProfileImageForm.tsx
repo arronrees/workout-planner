@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { FormButton } from '../form/FormButton';
+import Image from 'next/image';
 
 type Props = {
   user: User;
@@ -17,7 +18,7 @@ export default function UpdateUserProfileImageForm({ user }: Props) {
   const [profileImageFile, setProfileImageFile] = useState<File | null>(null);
   const [previewOpen, setPreviewOpen] = useState<boolean>(false);
 
-  const previewImgRef = useRef(null);
+  const previewImgRef = useRef<HTMLImageElement>(null);
 
   const handleProfileImageFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,14 +70,20 @@ export default function UpdateUserProfileImageForm({ user }: Props) {
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     if (e.target.files) {
-      setPreviewOpen(true);
-      setProfileImageFile(e.target.files[0]);
+      const file = e.target.files[0];
 
-      if (previewImgRef.current) {
-        const imgSrc = URL.createObjectURL(e.target.files[0]);
+      if (file) {
+        setPreviewOpen(true);
+        setProfileImageFile(file);
 
-        previewImgRef.current.src = imgSrc;
-        previewImgRef.current.style.display = 'block';
+        if (previewImgRef.current) {
+          const imgSrc = URL.createObjectURL(file);
+
+          previewImgRef.current.src = imgSrc;
+          previewImgRef.current.style.display = 'block';
+        }
+      } else {
+        setPreviewOpen(false);
       }
     }
   };
@@ -90,6 +97,14 @@ export default function UpdateUserProfileImageForm({ user }: Props) {
               <span className='block absolute w-full h-full bg-black opacity-30 z-10'></span>
               <CameraIcon className='w-5 h-5 text-white relative z-20' />
             </div>
+            {user.image && (
+              <Image
+                src={`${API_URL}/${user.image}`}
+                width={48}
+                height={48}
+                alt=''
+              />
+            )}
           </figure>
           <input
             type='file'
@@ -110,14 +125,15 @@ export default function UpdateUserProfileImageForm({ user }: Props) {
               className='absolute top-6 right-6'
               onClick={(e) => {
                 e.preventDefault();
-                console.log('click');
                 setPreviewOpen(false);
               }}
             >
               <XMarkIcon className='w-4 h-4' />
             </button>
             <figure className='w-36 h-36 rounded-full'>
-              <img
+              <Image
+                src=''
+                alt=''
                 className='rounded-full'
                 ref={previewImgRef}
                 style={{ display: 'none' }}

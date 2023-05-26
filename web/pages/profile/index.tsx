@@ -38,13 +38,13 @@ export default function Profile({ user }: PageProps) {
         </li>
         <span className='block w-11/12 mx-auto bg-zinc-100 h-[1px]'></span>
         <li>
-          <a
+          <Link
             href='/api/auth/signout'
             className='profile__nav__link text-red-700'
           >
             <ArrowRightOnRectangleIcon className='w-4 h-6' />
             <span>Logout</span>
-          </a>
+          </Link>
         </li>
       </ul>
     </Layout>

@@ -24,9 +24,9 @@ export default function Home() {
         <p className='font text-center mb-16 text-zinc-500'>
           Sign up to get started tracking your workouts and reaching your goals
         </p>
-        <a href='/auth/signup' className='btn btn--green'>
+        <Link href='/auth/signup' className='btn btn--green'>
           Register Now
-        </a>
+        </Link>
         <p className='text-center font-extralight text-xs mt-6'>
           Already have an account?{' '}
           <Link href='/auth/signin' className='font-semibold'>

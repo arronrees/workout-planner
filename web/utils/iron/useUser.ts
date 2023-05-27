@@ -7,7 +7,8 @@ export default function useUser({
   redirectTo = '',
   redirectIfFound = false,
 } = {}): { user: User | null | undefined; isLoading: boolean } {
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const fetcher = (...args: any[]) =>
+    fetch(args[0], args[1]).then((res) => res.json());
 
   const { data: user, isLoading } = useSWR('/api/user/find', fetcher);
 

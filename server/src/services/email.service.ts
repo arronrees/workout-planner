@@ -20,7 +20,7 @@ async function sendEmailVerification({
       subject: `${process.env.SITE_NAME} - Verify your email address`,
       html: `
         <p>Hi, <b>${name}.</b> Thanks for joining.</p>
-        <p>Please visit this <a href="${process.env.WEB_URL}/user/verify-email/${id}/${randomString}" target="_blank" rel="noreferrer">link</a> to verify your email address</p>
+        <p>Please visit this <a href="${process.env.WEB_URL}/user/verify-email/${id}?token=${randomString}" target="_blank" rel="noreferrer">link</a> to verify your email address</p>
       `,
     });
 

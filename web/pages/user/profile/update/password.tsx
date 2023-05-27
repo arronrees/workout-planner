@@ -73,7 +73,7 @@ export default function UpdatePassword({ user }: PageProps) {
 
       toast.success('Updated password successfully');
       setIsLoading(false);
-      router.push('/profile');
+      router.push('/user/profile');
       return;
     }
   };

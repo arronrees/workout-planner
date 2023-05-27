@@ -58,7 +58,7 @@ export default function UpdateUserProfileImageForm({ user }: Props) {
         toast.success('Profile image updated successfully');
         setIsLoading(false);
         setPreviewOpen(false);
-        return router.push('/profile');
+        return router.push('/user/profile');
       }
     } else {
       setPreviewOpen(false);

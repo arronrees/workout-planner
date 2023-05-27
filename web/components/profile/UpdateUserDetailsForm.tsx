@@ -70,7 +70,7 @@ export default function UpdateUserDetailsForm({ user }: Props) {
 
       toast.success('User details updated successfully');
       setIsLoading(false);
-      router.push('/profile');
+      router.push('/user/profile');
       return;
     }
   };

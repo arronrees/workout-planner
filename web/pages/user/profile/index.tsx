@@ -25,13 +25,19 @@ export default function Profile({ user }: PageProps) {
       </div>
       <ul className='grid gap-2'>
         <li>
-          <Link href='/profile/update/details' className='profile__nav__link'>
+          <Link
+            href='/user/profile/update/details'
+            className='profile__nav__link'
+          >
             <UserIcon className='w-4 h-6' />
             <span>Update My Details</span>
           </Link>
         </li>
         <li>
-          <Link href='/profile/update/password' className='profile__nav__link'>
+          <Link
+            href='/user/profile/update/password'
+            className='profile__nav__link'
+          >
             <LockClosedIcon className='w-4 h-6' />
             <span>Update Password</span>
           </Link>

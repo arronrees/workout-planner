@@ -70,7 +70,7 @@ export default function Header() {
         </Link>
       </div>
       {user && (
-        <Link href='/profile'>
+        <Link href='/user/profile'>
           {user.image ? (
             <div className='bg-zinc-200 w-14 h-14 rounded-full border-2 border-slate-500'>
               <figure>
@@ -103,7 +103,7 @@ export default function Header() {
           <ul className='p-6'>
             {user && (
               <li>
-                <Link href='/profile' className='nav__link'>
+                <Link href='/user/profile' className='nav__link'>
                   My Profile
                 </Link>
               </li>

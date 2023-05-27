@@ -72,3 +72,12 @@ img {
 .form__grid {
   @apply grid gap-3;
 }
+
+/* page header */
+.page__header__title {
+  @apply font-semibold text-2xl mb-2;
+}
+
+.page__header__subtitle {
+  @apply font-light text-sm text-zinc-500;
+}

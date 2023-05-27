@@ -22,3 +22,31 @@ model User {
   passwordResetString     String?
   image                   String?
 }
+
+enum MUSCLE_GROUP {
+  Chest
+  Shoulder
+  Back
+  Bicep
+  Tricep
+  Quad
+  Hamstring
+  Calf
+  Glute
+}
+
+enum EQUIPMENT {
+  Full
+  Basic
+  None
+}
+
+model Exercise {
+  id          String       @id @unique @default(uuid())
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  name        String       @db.VarChar(255)
+  muscleGroup MUSCLE_GROUP
+  equipment   EQUIPMENT
+  notes       String
+}

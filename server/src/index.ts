@@ -6,6 +6,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import { authRouter } from './routes/auth.routes';
 import { userRouter } from './routes/user.routes';
+import { exerciseRouter } from './routes/exercise.routes';
 import { checkJwtExits } from './middleware/auth.middleware';
 import path from 'path';
 
@@ -40,6 +41,7 @@ app.get('/', async (req: Request, res: Response) => {
 app.use('/api/auth', authRouter);
 app.use(checkJwtExits);
 app.use('/api/user', userRouter);
+app.use('/api/exercise', exerciseRouter);
 
 // error handler
 app.use('*', (req: Request, res: Response, next: NextFunction) => {

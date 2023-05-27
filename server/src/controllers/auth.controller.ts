@@ -154,7 +154,15 @@ export async function verifyEmailController(
           data: { emailVerified: true, emailVerificationString: null },
         });
 
-        return res.status(200).json({ success: true });
+        res.status(200).json({ success: true });
+
+        // send email verified email
+        const verifiedEmailMessage = await emailService.sendEmailVerified({
+          email: user.email,
+          name: user.name,
+        });
+
+        return;
       }
     }
 

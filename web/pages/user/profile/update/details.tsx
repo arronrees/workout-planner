@@ -1,6 +1,6 @@
 import DividerLine from '@/components/general/DividerLine';
-import UpdateUserDetailsForm from '@/components/profile/UpdateUserDetailsForm';
-import UpdateUserProfileImageForm from '@/components/profile/UpdateUserProfileImageForm';
+import UpdateUserDetailsForm from '@/components/user/UpdateUserDetailsForm';
+import UpdateUserProfileImageForm from '@/components/user/UpdateUserProfileImageForm';
 import { User } from '@/constant-types';
 import Layout from '@/layout/Layout';
 import { withSessionSsr } from '@/utils/iron/withSession';

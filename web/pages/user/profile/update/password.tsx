@@ -93,8 +93,8 @@ export default function UpdatePassword({ user }: PageProps) {
   return (
     <Layout>
       <section>
-        <h1 className='font-semibold text-2xl mb-2'>Update password</h1>
-        <p className='font-light text-sm text-zinc-500'>
+        <h1 className='page__header__title'>Update password</h1>
+        <p className='page__header__subtitle'>
           Update your password to something new
         </p>
       </section>

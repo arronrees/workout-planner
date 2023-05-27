@@ -14,10 +14,8 @@ export default function UpdateMyDetails({ user }: PageProps) {
     <Layout>
       <section className='flex justify-between gap-4 items-end'>
         <div>
-          <h1 className='font-semibold text-2xl mb-2'>Update My Details</h1>
-          <p className='font-light text-sm text-zinc-500'>
-            Update your details
-          </p>
+          <h1 className='page__header__title'>Update My Details</h1>
+          <p className='page__header__subtitle'>Update your details</p>
         </div>
         <UpdateUserProfileImageForm user={user} />
       </section>

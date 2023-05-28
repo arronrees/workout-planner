@@ -19,7 +19,7 @@ export default function NewExercise({ user }: PageProps) {
       <DividerLine />
 
       <section>
-        <NewExerciseForm />
+        <NewExerciseForm user={user} />
       </section>
     </Layout>
   );

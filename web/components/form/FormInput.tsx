@@ -16,7 +16,7 @@ export function FormInputText({
   infoText,
 }: FormInputTextProps) {
   return (
-    <div className=''>
+    <div>
       <label htmlFor={inputId} className='form__label'>
         {labelText}{' '}
         {optional ? (
@@ -36,17 +36,18 @@ export function FormInputText({
 type FormInputTextAreaProps = {
   labelText: string;
   inputId: string;
-  inputName: string;
   inputValue?: string;
   optional?: boolean;
+  infoText?: string;
+  children: ReactNode;
 };
 
 export function FormInputTextArea({
   labelText,
   inputId,
-  inputName,
-  inputValue,
+  infoText,
   optional,
+  children,
 }: FormInputTextAreaProps) {
   return (
     <div>
@@ -58,34 +59,28 @@ export function FormInputTextArea({
           ''
         )}
       </label>
-      <textarea
-        name={inputName}
-        id={inputId}
-        value={inputValue}
-        className='form__input'
-      ></textarea>
+      {infoText && (
+        <span className='block opacity-50 text-xs mb-1'>{infoText}</span>
+      )}
+      {children}
     </div>
   );
 }
 
 type FormInputSelectProps = {
   inputId: string;
-  inputName: string;
   labelText: string;
-  options: {
-    id: string | number;
-    value: string | number;
-    name: string;
-  }[];
   optional?: boolean;
+  infoText?: string;
+  children: ReactNode;
 };
 
 export function FormInputSelect({
   inputId,
-  inputName,
   labelText,
-  options,
   optional,
+  infoText,
+  children,
 }: FormInputSelectProps) {
   return (
     <div>
@@ -97,22 +92,11 @@ export function FormInputSelect({
           ''
         )}
       </label>
+      {infoText && (
+        <span className='block opacity-50 text-xs mb-1'>{infoText}</span>
+      )}
       <div className='relative'>
-        <select
-          name={inputName}
-          id={inputId}
-          className='form__input'
-          defaultValue='default'
-        >
-          <option value='default' disabled>
-            Select
-          </option>
-          {options.map((option) => (
-            <option value={option.value} key={option.id}>
-              {option.name}
-            </option>
-          ))}
-        </select>
+        {children}
         <svg
           xmlns='http://www.w3.org/2000/svg'
           fill='none'

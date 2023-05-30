@@ -16,5 +16,5 @@ export const muscleGroupOptions: { name: string; value: string; id: number }[] =
 export const equipmentOptions: { name: string; value: string; id: number }[] = [
   { name: 'Full', value: 'Full', id: 1 },
   { name: 'Basic', value: 'Basic', id: 2 },
-  { name: 'Nones', value: 'Nones', id: 3 },
+  { name: 'None', value: 'None', id: 3 },
 ];

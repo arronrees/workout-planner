@@ -41,7 +41,7 @@ app.get('/', async (req: Request, res: Response) => {
 app.use('/api/auth', authRouter);
 app.use(checkJwtExits);
 app.use('/api/user', userRouter);
-app.use('/api/exercise', exerciseRouter);
+app.use('/api/exercises', exerciseRouter);
 
 // error handler
 app.use('*', (req: Request, res: Response, next: NextFunction) => {

@@ -66,7 +66,7 @@ export default function NewExerciseForm({ user }: Props) {
       },
     };
 
-    const res = await fetch(`${API_URL}/api/exercise/new`, {
+    const res = await fetch(`${API_URL}/api/exercises/new`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

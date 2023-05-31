@@ -45,12 +45,12 @@ export default function ExerciseGridItem({ exercise }: Props) {
                 <Menu.Item>
                   {({ active }) => (
                     <Link
-                      href=''
+                      href={`/exercises/edit/${exercise.id}`}
                       className={`${
                         active ? 'bg-blue-400 text-white' : 'text-gray-900'
-                      } flex w-full items-center rounded px-2 py-2 text-sm transition duration-150`}
+                      } flex w-full items-center rounded px-2 py-3 text-xs transition duration-150`}
                     >
-                      <PencilIcon className='w-4 h-4 mr-2' />
+                      <PencilIcon className='w-3 h-3 mr-2' />
                       Edit
                     </Link>
                   )}
@@ -62,9 +62,9 @@ export default function ExerciseGridItem({ exercise }: Props) {
                       href=''
                       className={`${
                         active ? 'bg-blue-400 text-white' : 'text-gray-900'
-                      } flex w-full items-center rounded px-2 py-2 text-sm transition duration-150`}
+                      } flex w-full items-center rounded px-2 py-3 text-xs transition duration-150`}
                     >
-                      <QueueListIcon className='w-4 h-4 mr-2' />
+                      <QueueListIcon className='w-3 h-3 mr-2' />
                       View exercise history
                     </Link>
                   )}
@@ -76,9 +76,9 @@ export default function ExerciseGridItem({ exercise }: Props) {
                       href=''
                       className={`${
                         active ? 'bg-blue-400 text-white' : 'text-gray-900'
-                      } flex w-full items-center rounded px-2 py-2 text-sm transition duration-150`}
+                      } flex w-full items-center rounded px-2 py-3 text-xs transition duration-150`}
                     >
-                      <ChartBarIcon className='w-4 h-4 mr-2' />
+                      <ChartBarIcon className='w-3 h-3 mr-2' />
                       Add new weight
                     </Link>
                   )}

@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { JsonApiResponse, ResLocals } from '../constant-types';
 import { NewExerciseType } from '../models/exercise.model';
 import { prismaDB } from '..';
+import { isValidUuid } from '../utils/index.utils';
 
 // GET /user
 export async function getUserExercises(
@@ -19,6 +20,40 @@ export async function getUserExercises(
     });
 
     return res.status(200).json({ success: true, data: exercises });
+  } catch (err) {
+    console.error(err);
+
+    next(err);
+  }
+}
+
+// GET /find/:exerciseId
+export async function findIfSingleExerciseExists(
+  req: Request,
+  res: Response<JsonApiResponse> & { locals: ResLocals },
+  next: NextFunction
+) {
+  try {
+    const { exerciseId } = req.params;
+
+    if (!exerciseId || !isValidUuid(exerciseId)) {
+      return res
+        .status(404)
+        .json({ success: false, error: 'Exercise not found' });
+    }
+
+    const exerciseFound = await prismaDB.exercise.findUnique({
+      where: { id: exerciseId },
+      select: { id: true },
+    });
+
+    if (exerciseFound) {
+      return res.status(200).json({ success: true });
+    } else {
+      return res
+        .status(404)
+        .json({ success: false, error: 'Exercise not found' });
+    }
   } catch (err) {
     console.error(err);
 

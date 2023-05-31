@@ -1,4 +1,5 @@
 import ExerciseGrid from '@/components/exercises/ExerciseGrid';
+import NewExerciseGridItem from '@/components/exercises/NewExerciseGridItem';
 import DividerLine from '@/components/general/DividerLine';
 import { User } from '@/constant-types';
 import Layout from '@/layout/Layout';
@@ -21,7 +22,9 @@ export default function UserExercises({ user }: PageProps) {
 
       <DividerLine />
 
-      <ExerciseGrid />
+      <ExerciseGrid>
+        <NewExerciseGridItem />
+      </ExerciseGrid>
     </Layout>
   );
 }

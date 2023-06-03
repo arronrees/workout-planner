@@ -1,9 +1,15 @@
+import UpdateExerciseForm from '@/components/exercises/UpdateExerciseForm';
 import DividerLine from '@/components/general/DividerLine';
+import { Exercise, User } from '@/constant-types';
 import { API_URL } from '@/constants';
 import Layout from '@/layout/Layout';
 import { withSessionSsr } from '@/utils/iron/withSession';
 
-export default function EditExercise() {
+type Props = {
+  user: User;
+};
+
+export default function EditExercise({ user }: Props) {
   return (
     <Layout>
       <section>
@@ -14,6 +20,10 @@ export default function EditExercise() {
       </section>
 
       <DividerLine />
+
+      <section>
+        <UpdateExerciseForm />
+      </section>
     </Layout>
   );
 }

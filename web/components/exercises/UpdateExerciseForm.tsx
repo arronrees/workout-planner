@@ -4,13 +4,14 @@ import {
   FormInputTextArea,
 } from '../form/FormInput';
 import { API_URL, equipmentOptions, muscleGroupOptions } from '@/constants';
-import { SubmitHandler, set, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { FormButton } from '../form/FormButton';
 import useUser from '@/utils/iron/useUser';
 import { Exercise } from '@/constant-types';
+import LoadingSpinner from '../general/LoadingSpinner';
 
 type FormInputs = {
   name: string;
@@ -49,7 +50,7 @@ type FormData = {
 export default function UpdateExerciseForm() {
   const { user, isLoading: isUserLoading } = useUser();
 
-  const [isDataLoading, setDataIsLoading] = useState<boolean>(true);
+  const [isDataLoading, setIsDataLoading] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [exercise, setExercise] = useState<Exercise | null>(null);
 
@@ -86,6 +87,7 @@ export default function UpdateExerciseForm() {
             setValue('notes', data.data.notes);
 
             setExercise(data.data);
+            setIsDataLoading(false);
           } else {
             toast.error('Could not get exercise details, please try again');
             router.push('/exercises');
@@ -135,7 +137,7 @@ export default function UpdateExerciseForm() {
         setIsLoading(false);
         return;
       } else {
-        toast.success('Exercise created successfully');
+        toast.success('Exercise updated successfully');
         setIsLoading(false);
         router.push('/exercises');
         return;
@@ -144,6 +146,10 @@ export default function UpdateExerciseForm() {
       toast.error('Could not update details, please try again.');
     }
   };
+
+  if (isUserLoading || isDataLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <form className='form__grid' onSubmit={handleSubmit(handleFormSubmit)}>

@@ -3,10 +3,15 @@ import Router from 'next/router';
 import useSWR from 'swr';
 import { User } from '@/constant-types';
 
+type Props = {
+  redirectTo?: string;
+  redirectIfFound?: boolean;
+};
+
 export default function useUser({
   redirectTo = '',
   redirectIfFound = false,
-} = {}): { user: User | null | undefined; isLoading: boolean } {
+}: Props = {}): { user: User | null | undefined; isLoading: boolean } {
   const fetcher = (...args: any[]) =>
     fetch(args[0], args[1]).then((res) => res.json());
 

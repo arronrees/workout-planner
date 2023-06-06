@@ -64,7 +64,7 @@ textarea.form__input {
 
 /* nav */
 .nav__link {
-  @apply py-4 block border-b border-zinc-200 uppercase tracking-widest hover:text-zinc-500 focus:text-zinc-500 transition duration-150;
+  @apply py-3 block uppercase tracking-widest hover:text-zinc-400 focus:text-zinc-500 transition duration-150;
 }
 
 /* profile */

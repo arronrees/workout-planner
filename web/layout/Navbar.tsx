@@ -1,3 +1,4 @@
+import DividerLine from '@/components/general/DividerLine';
 import { User } from '@/constant-types';
 import Link from 'next/link';
 
@@ -28,6 +29,8 @@ export default function Navbar({ user }: Props) {
                 Create Exercise
               </Link>
             </li>
+
+            <DividerLine className='py-2' />
 
             <li>
               <Link href='/user/profile' className='nav__link'>

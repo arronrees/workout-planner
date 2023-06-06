@@ -3,6 +3,7 @@ import useUser from '@/utils/iron/useUser';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import Navbar from './Navbar';
 
 export default function Header() {
   const { user } = useUser();
@@ -91,33 +92,7 @@ export default function Header() {
           )}
         </Link>
       )}
-      {navOpen && (
-        <nav
-          className='fixed z-50 left-6 border-2 border-zinc-200 rounded bg-zinc-50 shadow-md'
-          style={{
-            width: 'calc(100vw - 3rem)',
-            height: 'calc(100vh - 7.5rem)',
-            top: '6rem',
-          }}
-        >
-          <ul className='p-6'>
-            {user && (
-              <li>
-                <Link href='/user/profile' className='nav__link'>
-                  My Profile
-                </Link>
-              </li>
-            )}
-            {user && (
-              <li>
-                <Link href='/api/auth/signout' className='nav__link'>
-                  Logout
-                </Link>
-              </li>
-            )}
-          </ul>
-        </nav>
-      )}
+      {navOpen && <Navbar user={user} />}
     </header>
   );
 }

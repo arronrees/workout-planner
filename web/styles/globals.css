@@ -85,3 +85,7 @@ textarea.form__input {
 .page__header__subtitle {
   @apply font-light text-sm text-zinc-500;
 }
+
+.back__btn {
+  @apply flex items-center justify-start gap-2 text-xs mb-6 opacity-50 transition duration-150 hover:opacity-100 focus:opacity-100;
+}

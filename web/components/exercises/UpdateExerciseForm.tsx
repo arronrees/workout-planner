@@ -90,13 +90,13 @@ export default function UpdateExerciseForm() {
             setIsDataLoading(false);
           } else {
             toast.error('Could not get exercise details, please try again');
-            router.push('/exercises');
+            router.push(`/exercises/${router.query.id}`);
           }
         })
         .catch((err) => {
           console.error(err);
           toast.error('Could not get exercise details, please try again');
-          router.push('/exercises');
+          router.push(`/exercises/${router.query.id}`);
         });
     }
   }, [user, router, setValue]);
@@ -139,7 +139,7 @@ export default function UpdateExerciseForm() {
       } else {
         toast.success('Exercise updated successfully');
         setIsLoading(false);
-        router.push('/exercises');
+        router.push(`/exercises/${router.query.id}`);
         return;
       }
     } else {

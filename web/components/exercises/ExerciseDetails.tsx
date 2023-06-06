@@ -7,7 +7,6 @@ import useUser from '@/utils/iron/useUser';
 import { Exercise } from '@/constant-types';
 import { toast } from 'react-hot-toast';
 import { PencilSquareIcon } from '@heroicons/react/24/solid';
-import { ArrowLeftCircleIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
 export default function ExerciseDetails() {
@@ -48,14 +47,6 @@ export default function ExerciseDetails() {
 
   return (
     <>
-      <div>
-        <Link href='/exercises' className='back__btn'>
-          <span>
-            <ArrowLeftCircleIcon className='w-4 h-4' />
-          </span>
-          <span>Back to exercises</span>
-        </Link>
-      </div>
       <section className='flex justify-between gap-4 items-end'>
         <div>
           <h1 className='page__header__title'>{exercise.name}</h1>

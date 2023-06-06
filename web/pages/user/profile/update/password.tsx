@@ -1,3 +1,4 @@
+import BackBtn from '@/components/general/BackBtn';
 import DividerLine from '@/components/general/DividerLine';
 import UpdateUserPasswordForm from '@/components/user/UpdateUserPasswordForm';
 import { User } from '@/constant-types';
@@ -11,6 +12,8 @@ type PageProps = {
 export default function UpdatePassword({ user }: PageProps) {
   return (
     <Layout>
+      <BackBtn text='Back to profile' href='/user/profile' />
+
       <section>
         <h1 className='page__header__title'>Update password</h1>
         <p className='page__header__subtitle'>

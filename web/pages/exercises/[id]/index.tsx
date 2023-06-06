@@ -1,4 +1,5 @@
 import ExerciseDetails from '@/components/exercises/ExerciseDetails';
+import BackBtn from '@/components/general/BackBtn';
 import { User } from '@/constant-types';
 import { API_URL } from '@/constants';
 import Layout from '@/layout/Layout';
@@ -11,6 +12,8 @@ type Props = {
 export default function ViewExercise({ user }: Props) {
   return (
     <Layout>
+      <BackBtn text='Back to exercises' href='/exercises' />
+
       <ExerciseDetails />
     </Layout>
   );

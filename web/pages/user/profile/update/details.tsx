@@ -1,3 +1,4 @@
+import BackBtn from '@/components/general/BackBtn';
 import DividerLine from '@/components/general/DividerLine';
 import UpdateUserDetailsForm from '@/components/user/UpdateUserDetailsForm';
 import UpdateUserProfileImageForm from '@/components/user/UpdateUserProfileImageForm';
@@ -12,6 +13,8 @@ type PageProps = {
 export default function UpdateMyDetails({ user }: PageProps) {
   return (
     <Layout>
+      <BackBtn text='Back to profile' href='/user/profile' />
+
       <section className='flex justify-between gap-4 items-end'>
         <div>
           <h1 className='page__header__title'>Update My Details</h1>

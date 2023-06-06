@@ -1,17 +1,23 @@
 import UpdateExerciseForm from '@/components/exercises/UpdateExerciseForm';
+import BackBtn from '@/components/general/BackBtn';
 import DividerLine from '@/components/general/DividerLine';
 import { User } from '@/constant-types';
 import { API_URL } from '@/constants';
 import Layout from '@/layout/Layout';
 import { withSessionSsr } from '@/utils/iron/withSession';
+import { useRouter } from 'next/router';
 
 type Props = {
   user: User;
 };
 
 export default function UpdateExercise({ user }: Props) {
+  const router = useRouter();
+
   return (
     <Layout>
+      <BackBtn text='Back to exercise' href={`/exercises/${router.query.id}`} />
+
       <section>
         <h1 className='page__header__title'>Update Exercise</h1>
         <p className='page__header__subtitle'>

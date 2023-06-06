@@ -16,18 +16,20 @@ type Props = {
 export default function ExerciseGridItem({ exercise }: Props) {
   return (
     <div className='p-4 border rounded text-xs flex justify-between items-center gap-4 relative'>
-      <div>
-        <p className='font-semibold mb-2'>{exercise.name}</p>
-        <div className='flex gap-2 items-center text-gray-600 font-light'>
-          <p>{exercise.equipment}</p>
-          <span className='h-4 w-[1px] bg-gray-200 block'></span>
-          <p>{exercise.muscleGroup}</p>
+      <Link href={`/exercises/${exercise.id}`}>
+        <div>
+          <p className='font-semibold mb-2'>{exercise.name}</p>
+          <div className='flex gap-2 items-center text-gray-600 font-light'>
+            <p>{exercise.equipment}</p>
+            <span className='h-4 w-[1px] bg-gray-200 block'></span>
+            <p>{exercise.muscleGroup}</p>
+          </div>
         </div>
-      </div>
+      </Link>
       <div>
         <Menu>
           <div>
-            <Menu.Button>
+            <Menu.Button className='flex items-center justify-center'>
               <EllipsisVerticalIcon className='w-6 h-6' />
             </Menu.Button>
           </div>
@@ -45,7 +47,7 @@ export default function ExerciseGridItem({ exercise }: Props) {
                 <Menu.Item>
                   {({ active }) => (
                     <Link
-                      href={`/exercises/edit/${exercise.id}`}
+                      href={`/exercises/${exercise.id}/update`}
                       className={`${
                         active ? 'bg-blue-400 text-white' : 'text-gray-900'
                       } flex w-full items-center rounded px-2 py-3 text-xs transition duration-150`}

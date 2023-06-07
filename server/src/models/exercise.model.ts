@@ -69,3 +69,18 @@ export const updateExerciseModel = z.object({
 });
 
 export type UpdateExerciseType = z.infer<typeof updateExerciseModel>;
+
+export const newExerciseProgressionModel = z.object({
+  weight: z.string({
+    required_error: 'Weight is required',
+    invalid_type_error: 'Weight must be a string',
+  }),
+  reps: z.string({
+    required_error: 'Reps is required',
+    invalid_type_error: 'Reps must be a string',
+  }),
+});
+
+export type NewExerciseProgressionType = z.infer<
+  typeof newExerciseProgressionModel
+>;

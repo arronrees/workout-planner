@@ -1,6 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import { JsonApiResponse, ResLocals } from '../constant-types';
-import { NewExerciseType, UpdateExerciseType } from '../models/exercise.model';
+import {
+  NewExerciseProgressionType,
+  NewExerciseType,
+  UpdateExerciseType,
+} from '../models/exercise.model';
 import { prismaDB } from '..';
 import { isValidUuid } from '../utils/index.utils';
 
@@ -118,6 +122,46 @@ export async function createNewExerciseController(
     });
 
     return res.status(200).json({ success: true, data: newExercise });
+  } catch (err) {
+    console.error(err);
+
+    next(err);
+  }
+}
+
+// POST /progression/new
+export async function createNewExerciseProgressionController(
+  req: Request,
+  res: Response<JsonApiResponse> & { locals: ResLocals },
+  next: NextFunction
+) {
+  try {
+    const { progression }: { progression: NewExerciseProgressionType } =
+      req.body;
+    const { exerciseId } = req.params;
+
+    const exercise = await prismaDB.exercise.findUnique({
+      where: { id: exerciseId },
+    });
+
+    if (!exercise) {
+      return res
+        .status(404)
+        .json({ success: false, error: 'Exercise not found' });
+    }
+
+    const newProgression = await prismaDB.exerciseProgression.create({
+      data: {
+        ...progression,
+        Exercise: {
+          connect: {
+            id: exerciseId,
+          },
+        },
+      },
+    });
+
+    return res.status(200).json({ success: true, data: newProgression });
   } catch (err) {
     console.error(err);
 

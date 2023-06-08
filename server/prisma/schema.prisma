@@ -59,8 +59,8 @@ model ExerciseProgression {
   id         String   @id @unique @default(uuid())
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  Exercise   Exercise @relation(fields: [exerciseId], references: [id])
   exerciseId String
+  Exercise   Exercise @relation(fields: [exerciseId], references: [id])
   weight     String
   reps       String
 }

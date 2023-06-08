@@ -1,5 +1,8 @@
 import { Router } from 'express';
-import { checkNewExerciseObjectValid } from '../middleware/exercise.middleware';
+import {
+  checkNewExerciseObjectValid,
+  checkNewExerciseProgressionObjectValid,
+} from '../middleware/exercise.middleware';
 import {
   createNewExerciseController,
   findIfSingleExerciseExists,
@@ -25,6 +28,12 @@ exerciseRouter.post(
   '/new',
   checkNewExerciseObjectValid,
   createNewExerciseController
+);
+
+// create new exercise progression
+exerciseRouter.post(
+  '/progression/new/:exerciseId',
+  checkNewExerciseProgressionObjectValid
 );
 
 // update single exercise

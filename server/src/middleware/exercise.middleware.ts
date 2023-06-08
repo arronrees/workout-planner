@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { JsonApiResponse, ResLocals } from '../constant-types';
 import {
   newExerciseModel,
+  newExerciseProgressionModel,
   updateExerciseModel,
 } from '../models/exercise.model';
 import { z } from 'zod';
@@ -55,5 +56,23 @@ export async function checkUpdateExerciseObjectValid(
 
       next(err);
     }
+  }
+}
+
+export async function checkNewExerciseProgressionObjectValid(
+  req: Request,
+  res: Response<JsonApiResponse> & { locals: ResLocals },
+  next: NextFunction
+) {
+  try {
+    const { progression } = req.body;
+
+    newExerciseProgressionModel.parse(progression);
+
+    next();
+  } catch (err) {
+    console.error(err);
+
+    next(err);
   }
 }

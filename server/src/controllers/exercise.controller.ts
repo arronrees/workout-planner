@@ -83,6 +83,9 @@ export async function getSingleExercise(
 
     const exerciseFound = await prismaDB.exercise.findUnique({
       where: { id: exerciseId },
+      include: {
+        ExerciseProgression: { orderBy: { createdAt: 'desc' } },
+      },
     });
 
     if (exerciseFound) {
@@ -129,7 +132,7 @@ export async function createNewExerciseController(
   }
 }
 
-// POST /progression/new
+// POST /progression/new/:exerciseId
 export async function createNewExerciseProgressionController(
   req: Request,
   res: Response<JsonApiResponse> & { locals: ResLocals },

@@ -5,6 +5,7 @@ import {
 } from '../middleware/exercise.middleware';
 import {
   createNewExerciseController,
+  createNewExerciseProgressionController,
   findIfSingleExerciseExists,
   getSingleExercise,
   getUserExercises,
@@ -33,7 +34,8 @@ exerciseRouter.post(
 // create new exercise progression
 exerciseRouter.post(
   '/progression/new/:exerciseId',
-  checkNewExerciseProgressionObjectValid
+  checkNewExerciseProgressionObjectValid,
+  createNewExerciseProgressionController
 );
 
 // update single exercise

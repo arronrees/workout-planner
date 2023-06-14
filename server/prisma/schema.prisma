@@ -61,6 +61,6 @@ model ExerciseProgression {
   updatedAt  DateTime @updatedAt
   exerciseId String
   Exercise   Exercise @relation(fields: [exerciseId], references: [id])
-  weight     String
-  reps       String
+  weight     Int
+  reps       Int
 }

@@ -71,8 +71,16 @@ export async function checkNewExerciseProgressionObjectValid(
 
     next();
   } catch (err) {
-    console.error(err);
+    if (err instanceof z.ZodError) {
+      console.log(err.format());
 
-    next(err);
+      return res
+        .status(400)
+        .json({ success: false, error: err.errors[0].message });
+    } else {
+      console.error(err);
+
+      next(err);
+    }
   }
 }

@@ -8,6 +8,7 @@ import { Exercise } from '@/constant-types';
 import { toast } from 'react-hot-toast';
 import { PencilSquareIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
+import ProgressionGrid from './progessions/ProgressionGrid';
 
 export default function ExerciseDetails() {
   const router = useRouter();
@@ -66,7 +67,11 @@ export default function ExerciseDetails() {
 
       <DividerLine />
 
-      <section></section>
+      <section>
+        <h2 className='font-semibold mb-2'>Your Progress</h2>
+
+        <ProgressionGrid progressions={exercise.ExerciseProgression} />
+      </section>
     </>
   );
 }

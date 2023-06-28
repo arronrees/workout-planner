@@ -9,24 +9,33 @@ type Props = {
 
 export default function ProgressionGrid({ progressions, exercise }: Props) {
   return (
-    <div className='px-2 py-4 bg-zinc-50 rounded'>
-      <div className='grid grid-cols-3 gap-4 items-center border-b border-b-zinc-200 pb-2 px-2'>
-        <p className='font-medium text-xs'>Weight</p>
-        <p className='font-medium text-xs'>Reps</p>
-        <p className='font-medium text-xs'>Date</p>
+    <>
+      <table className='w-full text-left text-gray-500 overflow-x-auto'>
+        <thead className='text-gray-700 bg-white'>
+          <tr className='border-b border-b-zinc-200 '>
+            <th className='font-medium text-xs pb-2 px-2'>Weight</th>
+            <th className='font-medium text-xs pb-2 px-2'>Reps</th>
+            <th className='font-medium text-xs pb-2 px-2'>Date</th>
+            <th className='font-medium text-xs pb-2 px-2'></th>
+          </tr>
+        </thead>
+        <tbody>
+          {progressions &&
+            progressions.length > 0 &&
+            progressions.map((progression, index) => (
+              <ProgressionGridItem
+                key={progression.id}
+                progression={progression}
+                index={index}
+              />
+            ))}
+        </tbody>
+      </table>
+      <div className='px-2 py-4 bg-zinc-50 rounded'>
+        <div className='grid grid-cols-3 gap-4 items-center pb-2 px-2'>
+          <NewProgressionModal exercise={exercise} />
+        </div>
       </div>
-      {progressions &&
-        progressions.length > 0 &&
-        progressions.map((progression, index) => (
-          <ProgressionGridItem
-            key={progression.id}
-            progression={progression}
-            index={index}
-          />
-        ))}
-      <div className='grid grid-cols-3 gap-4 items-center pb-2 px-2'>
-        <NewProgressionModal exercise={exercise} />
-      </div>
-    </div>
+    </>
   );
 }

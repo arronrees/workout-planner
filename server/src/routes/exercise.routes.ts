@@ -31,16 +31,20 @@ exerciseRouter.post(
   createNewExerciseController
 );
 
-// create new exercise progression
-exerciseRouter.post(
-  '/progression/new/:exerciseId',
-  checkNewExerciseProgressionObjectValid,
-  createNewExerciseProgressionController
-);
-
 // update single exercise
 exerciseRouter.put(
   '/update/:exerciseId',
   checkUpdateExerciseObjectValid,
   updateSingleExerciseController
+);
+
+//
+// progressions
+//
+
+// create new exercise progression
+exerciseRouter.post(
+  '/progression/new/:exerciseId',
+  checkNewExerciseProgressionObjectValid,
+  createNewExerciseProgressionController
 );

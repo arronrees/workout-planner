@@ -132,6 +132,44 @@ export async function createNewExerciseController(
   }
 }
 
+// PUT /update/:exerciseId
+export async function updateSingleExerciseController(
+  req: Request,
+  res: Response<JsonApiResponse> & { locals: ResLocals },
+  next: NextFunction
+) {
+  try {
+    const { exerciseId } = req.params;
+
+    if (!exerciseId || !isValidUuid(exerciseId)) {
+      return res
+        .status(404)
+        .json({ success: false, error: 'Exercise not found' });
+    }
+
+    const { exercise }: { exercise: UpdateExerciseType } = req.body;
+
+    const updatedExercise = await prismaDB.exercise.update({
+      where: {
+        id: exerciseId,
+      },
+      data: {
+        ...exercise,
+      },
+    });
+
+    return res.status(200).json({ success: true, data: updatedExercise });
+  } catch (err) {
+    console.error(err);
+
+    next(err);
+  }
+}
+
+//
+// progressions
+//
+
 // POST /progression/new/:exerciseId
 export async function createNewExerciseProgressionController(
   req: Request,
@@ -165,40 +203,6 @@ export async function createNewExerciseProgressionController(
     });
 
     return res.status(200).json({ success: true, data: newProgression });
-  } catch (err) {
-    console.error(err);
-
-    next(err);
-  }
-}
-
-// PUT /update/:exerciseId
-export async function updateSingleExerciseController(
-  req: Request,
-  res: Response<JsonApiResponse> & { locals: ResLocals },
-  next: NextFunction
-) {
-  try {
-    const { exerciseId } = req.params;
-
-    if (!exerciseId || !isValidUuid(exerciseId)) {
-      return res
-        .status(404)
-        .json({ success: false, error: 'Exercise not found' });
-    }
-
-    const { exercise }: { exercise: UpdateExerciseType } = req.body;
-
-    const updatedExercise = await prismaDB.exercise.update({
-      where: {
-        id: exerciseId,
-      },
-      data: {
-        ...exercise,
-      },
-    });
-
-    return res.status(200).json({ success: true, data: updatedExercise });
   } catch (err) {
     console.error(err);
 

@@ -9,6 +9,7 @@ import { toast } from 'react-hot-toast';
 import { PencilSquareIcon } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 import ProgressionGrid from './progessions/ProgressionGrid';
+import NewProgressionModal from './progessions/NewProgressionModal';
 
 export default function ExerciseDetails() {
   const router = useRouter();
@@ -70,7 +71,10 @@ export default function ExerciseDetails() {
       <section>
         <h2 className='font-semibold mb-2'>Your Progress</h2>
 
-        <ProgressionGrid progressions={exercise.ExerciseProgression} />
+        <ProgressionGrid
+          progressions={exercise.ExerciseProgression}
+          exercise={exercise}
+        />
       </section>
     </>
   );

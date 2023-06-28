@@ -73,7 +73,7 @@ export type UpdateExerciseType = z.infer<typeof updateExerciseModel>;
 export const newExerciseProgressionModel = z.object({
   weight: z.number({
     required_error: 'Weight is required',
-    invalid_type_error: 'Weight must be a number or',
+    invalid_type_error: 'Weight must be a number',
   }),
   reps: z.number({
     required_error: 'Reps is required',

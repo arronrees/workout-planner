@@ -24,7 +24,7 @@ export default function UpdatePassword({ user }: PageProps) {
       <DividerLine />
 
       <section>
-        <UpdateUserPasswordForm user={user} />
+        <UpdateUserPasswordForm />
       </section>
     </Layout>
   );

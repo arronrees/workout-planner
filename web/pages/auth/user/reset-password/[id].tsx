@@ -26,7 +26,7 @@ type Props = {
   token: string;
 };
 
-export default function UpdatePassword({ id, token }: Props) {
+export default function ResetUserPassword({ id, token }: Props) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const router = useRouter();

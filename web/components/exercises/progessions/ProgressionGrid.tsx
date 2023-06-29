@@ -29,13 +29,13 @@ export default function ProgressionGrid({ progressions, exercise }: Props) {
                 index={index}
               />
             ))}
+          <tr>
+            <td colSpan={4}>
+              <NewProgressionModal exercise={exercise} />
+            </td>
+          </tr>
         </tbody>
       </table>
-      <div className='px-2 py-4 bg-zinc-50 rounded'>
-        <div className='grid grid-cols-3 gap-4 items-center pb-2 px-2'>
-          <NewProgressionModal exercise={exercise} />
-        </div>
-      </div>
     </>
   );
 }

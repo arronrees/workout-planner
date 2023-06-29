@@ -1,4 +1,3 @@
-import { User } from '@/constant-types';
 import { FormButton } from '../form/FormButton';
 import { FormInputText } from '../form/FormInput';
 import { useRouter } from 'next/router';
@@ -6,6 +5,8 @@ import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { API_URL } from '@/constants';
+import useUser from '@/utils/iron/useUser';
+import LoadingSpinner from '../general/LoadingSpinner';
 
 type FormInputs = {
   password: string;
@@ -19,61 +20,12 @@ type FormData = {
   };
 };
 
-type Props = {
-  user: User;
-};
-
-export default function UpdateUserPasswordForm({ user }: Props) {
+export default function UpdateUserPasswordForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const router = useRouter();
 
-  const handleFormSubmit: SubmitHandler<FormInputs> = async (data) => {
-    setIsLoading(true);
-
-    const formData: FormData = {
-      user: {
-        password: data.password,
-        passwordConfirmation: data.passwordConfirmation,
-      },
-    };
-
-    const res = await fetch(`${API_URL}/api/user/update/password`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer: ${user.token}`,
-      },
-      body: JSON.stringify(formData),
-    });
-    const responseData = await res.json();
-
-    if (!res.ok) {
-      if (responseData.error && typeof responseData.error === 'string') {
-        toast.error(responseData.error);
-      } else {
-        toast.error('Could not update password, please try again.');
-      }
-
-      setIsLoading(false);
-      return;
-    } else {
-      // update user session
-      const userRes = await fetch('/api/user/update');
-      const userData = await userRes.json();
-
-      if (!userRes.ok) {
-        setIsLoading(false);
-        toast.error(userData.error);
-        return;
-      }
-
-      toast.success('Updated password successfully');
-      setIsLoading(false);
-      router.push('/user/profile');
-      return;
-    }
-  };
+  const { user, isLoading: isUserLoading } = useUser();
 
   const {
     register,
@@ -86,6 +38,59 @@ export default function UpdateUserPasswordForm({ user }: Props) {
       passwordConfirmation: '',
     },
   });
+
+  const handleFormSubmit: SubmitHandler<FormInputs> = async (data) => {
+    if (user) {
+      setIsLoading(true);
+
+      const formData: FormData = {
+        user: {
+          password: data.password,
+          passwordConfirmation: data.passwordConfirmation,
+        },
+      };
+
+      const res = await fetch(`${API_URL}/api/user/update/password`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer: ${user.token}`,
+        },
+        body: JSON.stringify(formData),
+      });
+      const responseData = await res.json();
+
+      if (!res.ok) {
+        if (responseData.error && typeof responseData.error === 'string') {
+          toast.error(responseData.error);
+        } else {
+          toast.error('Could not update password, please try again.');
+        }
+
+        setIsLoading(false);
+        return;
+      } else {
+        // update user session
+        const userRes = await fetch('/api/user/update');
+        const userData = await userRes.json();
+
+        if (!userRes.ok) {
+          setIsLoading(false);
+          toast.error(userData.error);
+          return;
+        }
+
+        toast.success('Updated password successfully');
+        setIsLoading(false);
+        router.push('/user/profile');
+        return;
+      }
+    }
+  };
+
+  if (isUserLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <form className='form__grid' onSubmit={handleSubmit(handleFormSubmit)}>

@@ -13,7 +13,7 @@ type FormInputs = {
   email: string;
 };
 
-export default function UpdatePassword() {
+export default function RequestResetPassword() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const router = useRouter();

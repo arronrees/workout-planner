@@ -20,13 +20,13 @@ export default function UpdateMyDetails({ user }: PageProps) {
           <h1 className='page__header__title'>Update My Details</h1>
           <p className='page__header__subtitle'>Update your details</p>
         </div>
-        <UpdateUserProfileImageForm user={user} />
+        <UpdateUserProfileImageForm />
       </section>
 
       <DividerLine />
 
       <section>
-        <UpdateUserDetailsForm user={user} />
+        <UpdateUserDetailsForm />
       </section>
     </Layout>
   );

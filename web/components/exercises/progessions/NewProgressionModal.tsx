@@ -20,7 +20,7 @@ export default function NewProgressionModal({ exercise }: Props) {
   }
 
   return (
-    <>
+    <div>
       <div className='col-span-3 py-2'>
         <button
           type='button'
@@ -81,6 +81,6 @@ export default function NewProgressionModal({ exercise }: Props) {
           </div>
         </Dialog>
       </Transition>
-    </>
+    </div>
   );
 }

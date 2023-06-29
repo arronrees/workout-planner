@@ -2,10 +2,11 @@ import { toast } from 'react-hot-toast';
 import { FormButton } from '../form/FormButton';
 import { FormInputText } from '../form/FormInput';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { API_URL } from '@/constants';
-import { User } from '@/constant-types';
+import useUser from '@/utils/iron/useUser';
+import LoadingSpinner from '../general/LoadingSpinner';
 
 type FormInputs = {
   name: string;
@@ -19,72 +20,84 @@ type FormData = {
   };
 };
 
-type Props = {
-  user: User;
-};
-
-export default function UpdateUserDetailsForm({ user }: Props) {
+export default function UpdateUserDetailsForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const router = useRouter();
 
-  const handleFormSubmit: SubmitHandler<FormInputs> = async (data) => {
-    setIsLoading(true);
-
-    const formData: FormData = {
-      user: {
-        name: data.name,
-        email: data.email,
-      },
-    };
-
-    const res = await fetch(`${API_URL}/api/user/update/details`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer: ${user.token}`,
-      },
-      body: JSON.stringify(formData),
-    });
-    const responseData = await res.json();
-
-    if (!res.ok) {
-      if (responseData.error && typeof responseData.error === 'string') {
-        toast.error(responseData.error);
-      } else {
-        toast.error('Could not update details, please try again.');
-      }
-
-      setIsLoading(false);
-      return;
-    } else {
-      // update user session
-      const userRes = await fetch('/api/user/update');
-      const userData = await userRes.json();
-
-      if (!userRes.ok) {
-        setIsLoading(false);
-        toast.error(userData.error);
-        return;
-      }
-
-      toast.success('User details updated successfully');
-      setIsLoading(false);
-      router.push('/user/profile');
-      return;
-    }
-  };
+  const { user, isLoading: isUserLoading } = useUser();
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<FormInputs>({
     defaultValues: {
-      name: user.name,
-      email: user.email,
+      name: '',
+      email: '',
     },
   });
+
+  useEffect(() => {
+    if (user) {
+      setValue('name', user.name);
+      setValue('email', user.email);
+    }
+  }, [user, setValue]);
+
+  const handleFormSubmit: SubmitHandler<FormInputs> = async (data) => {
+    if (user) {
+      setIsLoading(true);
+
+      const formData: FormData = {
+        user: {
+          name: data.name,
+          email: data.email,
+        },
+      };
+
+      const res = await fetch(`${API_URL}/api/user/update/details`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer: ${user.token}`,
+        },
+        body: JSON.stringify(formData),
+      });
+      const responseData = await res.json();
+
+      if (!res.ok) {
+        if (responseData.error && typeof responseData.error === 'string') {
+          toast.error(responseData.error);
+        } else {
+          toast.error('Could not update details, please try again.');
+        }
+
+        setIsLoading(false);
+        return;
+      } else {
+        // update user session
+        const userRes = await fetch('/api/user/update');
+        const userData = await userRes.json();
+
+        if (!userRes.ok) {
+          setIsLoading(false);
+          toast.error(userData.error);
+          return;
+        }
+
+        toast.success('User details updated successfully');
+        setIsLoading(false);
+        router.push('/user/profile');
+        return;
+      }
+    }
+  };
+
+  if (isUserLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <form className='form__grid' onSubmit={handleSubmit(handleFormSubmit)}>

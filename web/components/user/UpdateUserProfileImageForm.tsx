@@ -1,4 +1,3 @@
-import { User } from '@/constant-types';
 import { API_URL } from '@/constants';
 import { CameraIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/router';
@@ -6,12 +5,10 @@ import { useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { FormButton } from '../form/FormButton';
 import Image from 'next/image';
+import useUser from '@/utils/iron/useUser';
+import LoadingSpinner from '../general/LoadingSpinner';
 
-type Props = {
-  user: User;
-};
-
-export default function UpdateUserProfileImageForm({ user }: Props) {
+export default function UpdateUserProfileImageForm() {
   const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -20,10 +17,12 @@ export default function UpdateUserProfileImageForm({ user }: Props) {
 
   const previewImgRef = useRef<HTMLImageElement>(null);
 
+  const { user, isLoading: isUserLoading } = useUser();
+
   const handleProfileImageFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (profileImageFile) {
+    if (profileImageFile && user) {
       setIsLoading(true);
       const formData = new FormData();
 
@@ -88,6 +87,10 @@ export default function UpdateUserProfileImageForm({ user }: Props) {
     }
   };
 
+  if (isUserLoading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <div>
       <form onSubmit={handleProfileImageFormSubmit}>
@@ -97,7 +100,7 @@ export default function UpdateUserProfileImageForm({ user }: Props) {
               <span className='block absolute w-full h-full bg-black opacity-30 z-10'></span>
               <CameraIcon className='w-5 h-5 text-white relative z-20' />
             </div>
-            {user.image && (
+            {user && user.image && (
               <Image
                 src={`${API_URL}/${user.image}`}
                 width={48}

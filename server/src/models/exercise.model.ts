@@ -79,6 +79,10 @@ export const newExerciseProgressionModel = z.object({
     required_error: 'Reps is required',
     invalid_type_error: 'Reps must be a number',
   }),
+  sets: z.number({
+    required_error: 'Sets is required',
+    invalid_type_error: 'Sets must be a number',
+  }),
 });
 
 export type NewExerciseProgressionType = z.infer<

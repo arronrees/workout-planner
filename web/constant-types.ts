@@ -44,6 +44,7 @@ export type ExerciseProgression = {
   createdAt: Date;
   updatedAt: Date;
   exerciseId: string;
-  weight: string;
-  reps: string;
+  weight: number;
+  reps: number;
+  sets: number;
 };

@@ -63,4 +63,5 @@ model ExerciseProgression {
   Exercise   Exercise @relation(fields: [exerciseId], references: [id])
   weight     Int
   reps       Int
+  sets       Int
 }

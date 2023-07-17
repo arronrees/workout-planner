@@ -14,6 +14,7 @@ export default function ProgressionGrid({ progressions, exercise }: Props) {
         <thead className='text-gray-700 bg-white'>
           <tr className='border-b border-b-zinc-200 '>
             <th className='font-medium text-xs pb-2 px-2'>Weight</th>
+            <th className='font-medium text-xs pb-2 px-2'>Sets</th>
             <th className='font-medium text-xs pb-2 px-2'>Reps</th>
             <th className='font-medium text-xs pb-2 px-2'>Date</th>
             <th className='font-medium text-xs pb-2 px-2'></th>

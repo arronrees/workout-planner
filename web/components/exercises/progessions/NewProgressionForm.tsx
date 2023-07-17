@@ -10,12 +10,14 @@ import useUser from '@/utils/iron/useUser';
 type FormInputs = {
   weight: number;
   reps: number;
+  sets: number;
 };
 
 type FormData = {
   progression: {
     weight: number;
     reps: number;
+    sets: number;
   };
 };
 
@@ -45,6 +47,7 @@ export default function NewProgressionForm({ exerciseId, closeModal }: Props) {
         progression: {
           weight: data.weight,
           reps: data.reps,
+          sets: data.sets,
         },
       };
 
@@ -95,6 +98,22 @@ export default function NewProgressionForm({ exerciseId, closeModal }: Props) {
           />
           {errors.weight?.message && (
             <p className='form__error'>{errors.weight?.message}</p>
+          )}
+        </>
+      </FormInputText>
+      <FormInputText labelText='Sets' inputId='sets'>
+        <>
+          <input
+            type='text'
+            id='sets'
+            {...register('sets', {
+              required: 'Sets is required',
+              valueAsNumber: true,
+            })}
+            className='form__input'
+          />
+          {errors.sets?.message && (
+            <p className='form__error'>{errors.sets?.message}</p>
           )}
         </>
       </FormInputText>

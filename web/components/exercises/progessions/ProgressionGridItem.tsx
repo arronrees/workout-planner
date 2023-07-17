@@ -64,6 +64,7 @@ export default function ProgressionGridItem({ progression, index }: Props) {
       <td className='text-xs text-gray-500 py-3 px-2'>
         {progression.weight} kg
       </td>
+      <td className='text-xs text-gray-500 py-3 px-2'>{progression.sets}</td>
       <td className='text-xs text-gray-500 py-3 px-2'>{progression.reps}</td>
       <td className='text-xs text-gray-500 py-3 px-2'>
         {new Date(progression.createdAt).toLocaleDateString()}

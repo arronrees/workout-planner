@@ -16,6 +16,8 @@ export const emailTransporter = createTransport({
 export const userDataToOmitFromResponse: string[] = [
   'password',
   'emailVerificationString',
+  'passwordResetString',
+  'emailVerificationString',
 ];
 
 export const multerStorage = multer.diskStorage({

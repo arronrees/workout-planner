@@ -31,7 +31,7 @@ export default function ProgressionGrid({ progressions, exercise }: Props) {
               />
             ))}
           <tr>
-            <td colSpan={4}>
+            <td colSpan={5}>
               <NewProgressionModal exercise={exercise} />
             </td>
           </tr>

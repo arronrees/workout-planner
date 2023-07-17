@@ -15,6 +15,7 @@ import emailService from '../services/email.service';
 import randomstring from 'randomstring';
 import { isValidUuid } from '../utils/index.utils';
 import { JsonApiResponse } from '../constant-types';
+import { userDataToOmitFromResponse } from '../constants';
 
 // POST /signup
 export async function signupUserController(
@@ -51,10 +52,7 @@ export async function signupUserController(
 
     res.status(200).json({
       success: true,
-      data: omit({ ...newUser, token }, [
-        'password',
-        'emailVerificationString',
-      ]),
+      data: omit({ ...newUser, token }, userDataToOmitFromResponse),
     });
 
     // send verification email
@@ -110,10 +108,7 @@ export async function signinUserController(
 
     return res.status(200).json({
       success: true,
-      data: omit({ ...userExists, token }, [
-        'password',
-        'emailVerificationString',
-      ]),
+      data: omit({ ...userExists, token }, userDataToOmitFromResponse),
     });
   } catch (err) {
     console.error(err);

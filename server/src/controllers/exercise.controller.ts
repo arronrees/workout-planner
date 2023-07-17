@@ -209,3 +209,30 @@ export async function createNewExerciseProgressionController(
     next(err);
   }
 }
+
+// DELETE /progression/delete/:progressionId
+export async function deleteSingleExerciseProgressionController(
+  req: Request,
+  res: Response<JsonApiResponse> & { locals: ResLocals },
+  next: NextFunction
+) {
+  try {
+    const { progressionId } = req.params;
+
+    const progression = await prismaDB.exerciseProgression.delete({
+      where: { id: progressionId },
+    });
+
+    if (!progression) {
+      return res
+        .status(404)
+        .json({ success: false, error: 'Could not delete progression' });
+    }
+
+    return res.status(200).json({ success: true });
+  } catch (err) {
+    console.error(err);
+
+    next(err);
+  }
+}

@@ -1,4 +1,6 @@
 import { ExerciseProgression } from '@/constant-types';
+import { API_URL } from '@/constants';
+import useUser from '@/utils/iron/useUser';
 import { Menu, Transition } from '@headlessui/react';
 import {
   EllipsisVerticalIcon,
@@ -6,7 +8,9 @@ import {
   TrashIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Fragment } from 'react';
+import { toast } from 'react-hot-toast';
 
 type Props = {
   progression: ExerciseProgression;
@@ -14,6 +18,43 @@ type Props = {
 };
 
 export default function ProgressionGridItem({ progression, index }: Props) {
+  const { user } = useUser();
+
+  const router = useRouter();
+
+  const handleDeleteClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    if (user) {
+      const res = await fetch(
+        `${API_URL}/api/exercises/progression/delete/${progression.id}`,
+        {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer: ${user.token}`,
+          },
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        if (data.error && typeof data.error === 'string') {
+          toast.error(data.error);
+        } else {
+          toast.error('Could not delete progression, please try again.');
+        }
+
+        return;
+      } else {
+        toast.success('Progression deleted successfully');
+        router.push(`/exercises/${progression.exerciseId}`);
+        return;
+      }
+    }
+  };
+
   return (
     <tr
       className={`border-b border-b-zinc-100 py-3 px-2 relative ${
@@ -62,15 +103,16 @@ export default function ProgressionGridItem({ progression, index }: Props) {
                   <div className='h-[1px] w-full bg-zinc-100 my-1'></div>
                   <Menu.Item>
                     {({ active }) => (
-                      <Link
-                        href={`/`}
+                      <button
+                        type='button'
+                        onClick={handleDeleteClick}
                         className={`${
                           active ? 'bg-blue-400 text-white' : 'text-gray-900'
                         } flex w-full items-center rounded px-2 py-3 text-xs transition duration-150`}
                       >
                         <TrashIcon className='w-3 h-3 mr-2' />
                         Delete
-                      </Link>
+                      </button>
                     )}
                   </Menu.Item>
                 </div>

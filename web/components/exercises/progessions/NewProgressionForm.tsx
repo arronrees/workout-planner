@@ -48,8 +48,6 @@ export default function NewProgressionForm({ exerciseId, closeModal }: Props) {
         },
       };
 
-      console.log(formData);
-
       const res = await fetch(
         `${API_URL}/api/exercises/progression/new/${exerciseId}`,
         {
@@ -67,7 +65,7 @@ export default function NewProgressionForm({ exerciseId, closeModal }: Props) {
         if (responseData.error && typeof responseData.error === 'string') {
           toast.error(responseData.error);
         } else {
-          toast.error('Could not update details, please try again.');
+          toast.error('Could not create progression, please try again.');
         }
 
         setIsLoading(false);

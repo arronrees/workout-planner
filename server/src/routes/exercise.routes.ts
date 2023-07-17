@@ -6,6 +6,7 @@ import {
 import {
   createNewExerciseController,
   createNewExerciseProgressionController,
+  deleteSingleExerciseProgressionController,
   findIfSingleExerciseExists,
   getSingleExercise,
   getUserExercises,
@@ -47,4 +48,10 @@ exerciseRouter.post(
   '/progression/new/:exerciseId',
   checkNewExerciseProgressionObjectValid,
   createNewExerciseProgressionController
+);
+
+// delete exercise progression
+exerciseRouter.delete(
+  '/progression/delete/:progressionId',
+  deleteSingleExerciseProgressionController
 );

@@ -44,7 +44,19 @@ export async function signupUserController(
     const randomString = randomstring.generate();
 
     const newUser = await prismaDB.user.create({
-      data: { ...user, password: hash, emailVerificationString: randomString },
+      data: {
+        ...user,
+        password: hash,
+        emailVerificationString: randomString,
+        UserSettings: {
+          create: {
+            weightUnit: 'kg',
+          },
+        },
+      },
+      include: {
+        UserSettings: true,
+      },
     });
 
     // generate token
@@ -83,6 +95,7 @@ export async function signinUserController(
     // check if user exists in db before checking password
     const userExists = await prismaDB.user.findUnique({
       where: { email: user.email },
+      include: { UserSettings: true },
     });
 
     if (!userExists) {

@@ -7,6 +7,20 @@ export type User = {
   emailVerified: boolean;
   token: string;
   image?: string;
+  UserSettings?: UserSettings;
+};
+
+enum WeightUnit {
+  kg = 'kg',
+  lbs = 'lbs',
+}
+
+export type UserSettings = {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  weightUnit: WeightUnit;
+  userId: string;
 };
 
 enum Equipment {

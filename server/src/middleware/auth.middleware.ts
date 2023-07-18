@@ -90,6 +90,7 @@ export async function checkJwtExits(
 
     const user = await prismaDB.user.findUnique({
       where: { id },
+      include: { UserSettings: true },
     });
 
     if (!user) {

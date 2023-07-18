@@ -11,18 +11,18 @@ datasource db {
 }
 
 model User {
-  id                      String         @id @unique @default(uuid())
-  createdAt               DateTime       @default(now())
-  updatedAt               DateTime       @updatedAt
-  name                    String         @db.VarChar(255)
-  email                   String         @unique @db.VarChar(255)
+  id                      String        @id @unique @default(uuid())
+  createdAt               DateTime      @default(now())
+  updatedAt               DateTime      @updatedAt
+  name                    String        @db.VarChar(255)
+  email                   String        @unique @db.VarChar(255)
   password                String
-  emailVerified           Boolean        @default(false)
+  emailVerified           Boolean       @default(false)
   emailVerificationString String?
   passwordResetString     String?
   image                   String?
   Exercise                Exercise[]
-  UserSettings            UserSettings[]
+  UserSettings            UserSettings?
 }
 
 enum WEIGHT_UNIT {
@@ -34,9 +34,9 @@ model UserSettings {
   id         String      @id @unique @default(uuid())
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
-  User       User        @relation(fields: [userId], references: [id])
-  userId     String
   weightUnit WEIGHT_UNIT
+  User       User        @relation(fields: [userId], references: [id])
+  userId     String      @unique
 }
 
 enum MUSCLE_GROUP {

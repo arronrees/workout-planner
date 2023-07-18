@@ -22,6 +22,8 @@ export default function ProgressionGridItem({ progression, index }: Props) {
 
   const router = useRouter();
 
+  console.log(user);
+
   const handleDeleteClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
@@ -62,7 +64,7 @@ export default function ProgressionGridItem({ progression, index }: Props) {
       }`}
     >
       <td className='text-xs text-gray-500 py-3 px-2'>
-        {progression.weight} kg
+        {progression.weight} {user?.UserSettings?.weightUnit}
       </td>
       <td className='text-xs text-gray-500 py-3 px-2'>{progression.sets}</td>
       <td className='text-xs text-gray-500 py-3 px-2'>{progression.reps}</td>

@@ -85,7 +85,13 @@ export default function NewProgressionForm({ exerciseId, closeModal }: Props) {
 
   return (
     <form className='form__grid' onSubmit={handleSubmit(handleFormSubmit)}>
-      <FormInputText labelText='Weight' inputId='weight'>
+      <FormInputText
+        labelText={`Weight ${
+          user?.UserSettings?.weightUnit &&
+          `(${user?.UserSettings?.weightUnit})`
+        }`}
+        inputId='weight'
+      >
         <>
           <input
             type='text'

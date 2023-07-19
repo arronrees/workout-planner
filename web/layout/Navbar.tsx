@@ -1,6 +1,13 @@
 import DividerLine from '@/components/general/DividerLine';
 import { User } from '@/constant-types';
 import Link from 'next/link';
+import {
+  ArrowRightOnRectangleIcon,
+  LockClosedIcon,
+  QueueListIcon,
+  SquaresPlusIcon,
+  UserIcon,
+} from '@heroicons/react/24/outline';
 
 type Props = {
   user?: User | null;
@@ -21,12 +28,29 @@ export default function Navbar({ user }: Props) {
           <>
             <li>
               <Link href='/exercises' className='nav__link'>
-                My Exercises
+                <QueueListIcon className='w-4 h-6' />
+                <span>My Exercises</span>
               </Link>
             </li>
             <li>
               <Link href='/exercises/new' className='nav__link'>
-                Create Exercise
+                <SquaresPlusIcon className='w-4 h-6' />
+                <span>Create Exercise</span>
+              </Link>
+            </li>
+
+            <DividerLine className='py-2' />
+
+            <li>
+              <Link href='/workouts' className='nav__link'>
+                <QueueListIcon className='w-4 h-6' />
+                <span>My Workouts</span>
+              </Link>
+            </li>
+            <li>
+              <Link href='/workouts/new' className='nav__link'>
+                <SquaresPlusIcon className='w-4 h-6' />
+                <span>Create Workout</span>
               </Link>
             </li>
 
@@ -34,12 +58,14 @@ export default function Navbar({ user }: Props) {
 
             <li>
               <Link href='/user/profile' className='nav__link'>
-                My Profile
+                <UserIcon className='w-4 h-6' />
+                <span>My Profile</span>
               </Link>
             </li>
             <li>
-              <Link href='/api/auth/signout' className='nav__link'>
-                Logout
+              <Link href='/api/auth/signout' className='nav__link text-red-700'>
+                <ArrowRightOnRectangleIcon className='w-4 h-6' />
+                <span>Logout</span>
               </Link>
             </li>
           </>

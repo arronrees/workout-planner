@@ -4,6 +4,8 @@ import { withSessionSsr } from '@/utils/iron/withSession';
 import {
   ArrowRightOnRectangleIcon,
   LockClosedIcon,
+  QueueListIcon,
+  SquaresPlusIcon,
   UserIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
@@ -26,6 +28,44 @@ export default function Profile({ user }: PageProps) {
       <ul className='grid gap-2'>
         <li>
           <Link
+            href='/exercises'
+            className='profile__nav__link profile__nav__link--blue'
+          >
+            <QueueListIcon className='w-4 h-6' />
+            <span>My Exercises</span>
+          </Link>
+        </li>
+        <li>
+          <Link
+            href='/exercises/new'
+            className='profile__nav__link profile__nav__link--blue'
+          >
+            <SquaresPlusIcon className='w-4 h-6' />
+            <span>New Exercise</span>
+          </Link>
+        </li>
+        <span className='block w-11/12 mx-auto bg-zinc-100 h-[1px] my-[6px]'></span>
+        <li>
+          <Link
+            href='/workouts'
+            className='profile__nav__link profile__nav__link--green'
+          >
+            <QueueListIcon className='w-4 h-6' />
+            <span>My Workouts</span>
+          </Link>
+        </li>
+        <li>
+          <Link
+            href='/workouts/new'
+            className='profile__nav__link profile__nav__link--green'
+          >
+            <SquaresPlusIcon className='w-4 h-6' />
+            <span>New Workout</span>
+          </Link>
+        </li>
+        <span className='block w-11/12 mx-auto bg-zinc-100 h-[1px] my-[6px]'></span>
+        <li>
+          <Link
             href='/user/profile/update/details'
             className='profile__nav__link'
           >
@@ -42,11 +82,11 @@ export default function Profile({ user }: PageProps) {
             <span>Update Password</span>
           </Link>
         </li>
-        <span className='block w-11/12 mx-auto bg-zinc-100 h-[1px]'></span>
+        <span className='block w-11/12 mx-auto bg-zinc-100 h-[1px] my-[6px]'></span>
         <li>
           <Link
             href='/api/auth/signout'
-            className='profile__nav__link text-red-700'
+            className='profile__nav__link profile__nav__link--clear text-red-700'
           >
             <ArrowRightOnRectangleIcon className='w-4 h-6' />
             <span>Logout</span>

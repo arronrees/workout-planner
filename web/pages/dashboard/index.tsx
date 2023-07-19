@@ -35,6 +35,24 @@ export default function Dashboard({ user }: PageProps) {
             />
           </svg>
         </Link>
+        <Link href='/exercises/new' className='btn btn--blue btn--secondary'>
+          New exercise
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth={1.5}
+            stroke='currentColor'
+            className='w-6 h-6'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              d='M12 4.5v15m7.5-7.5h-15'
+              className='stroke-slate-500'
+            />
+          </svg>
+        </Link>
         <Link href='/' className='btn btn--green btn--secondary'>
           Previous workouts
           <svg

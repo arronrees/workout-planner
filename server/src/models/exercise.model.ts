@@ -16,6 +16,8 @@ export const newExerciseModel = z.object({
       'Hamstring',
       'Calf',
       'Glute',
+      'Abs',
+      'Core',
     ],
     {
       required_error: 'Muscle Group is required',
@@ -51,6 +53,8 @@ export const updateExerciseModel = z.object({
       'Hamstring',
       'Calf',
       'Glute',
+      'Abs',
+      'Core',
     ],
     {
       required_error: 'Muscle Group is required',

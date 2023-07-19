@@ -10,37 +10,20 @@ import {
 } from '../form/FormInput';
 import { FormButton } from '../form/FormButton';
 import useUser from '@/utils/iron/useUser';
+import { Equipment, MuscleGroup } from '@/constant-types';
 
 type FormInputs = {
   name: string;
-  muscleGroup:
-    | 'Chest'
-    | 'Shoulder'
-    | 'Back'
-    | 'Bicep'
-    | 'Tricep'
-    | 'Quad'
-    | 'Hamstring'
-    | 'Calf'
-    | 'Glute';
-  equipment: 'Full' | 'Basic' | 'None';
+  muscleGroup: MuscleGroup | '';
+  equipment: Equipment | '';
   notes?: string;
 };
 
 type FormData = {
   exercise: {
     name: string;
-    muscleGroup:
-      | 'Chest'
-      | 'Shoulder'
-      | 'Back'
-      | 'Bicep'
-      | 'Tricep'
-      | 'Quad'
-      | 'Hamstring'
-      | 'Calf'
-      | 'Glute';
-    equipment: 'Full' | 'Basic' | 'None';
+    muscleGroup: MuscleGroup | '';
+    equipment: Equipment | '';
     notes?: string;
   };
 };
@@ -59,8 +42,8 @@ export default function NewExerciseForm() {
   } = useForm<FormInputs>({
     defaultValues: {
       name: '',
-      muscleGroup: 'Chest',
-      equipment: 'Full',
+      muscleGroup: '',
+      equipment: '',
       notes: '',
     },
   });

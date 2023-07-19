@@ -49,6 +49,8 @@ enum MUSCLE_GROUP {
   Hamstring
   Calf
   Glute
+  Abs
+  Core
 }
 
 enum EQUIPMENT {

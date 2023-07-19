@@ -10,7 +10,7 @@ export type User = {
   UserSettings?: UserSettings;
 };
 
-enum WeightUnit {
+export enum WeightUnit {
   kg = 'kg',
   lbs = 'lbs',
 }
@@ -23,13 +23,13 @@ export type UserSettings = {
   userId: string;
 };
 
-enum Equipment {
+export enum Equipment {
   Full = 'Full',
   Basic = 'Basic',
   None = 'None',
 }
 
-enum MuscleGroup {
+export enum MuscleGroup {
   Chest = 'Chest',
   Shoulder = 'Shoulder',
   Back = 'Back',
@@ -39,6 +39,8 @@ enum MuscleGroup {
   Hamstring = 'Hamstring',
   Calf = 'Calf',
   Glute = 'Glute',
+  Abs = 'Abs',
+  Core = 'Core',
 }
 
 export type Exercise = {

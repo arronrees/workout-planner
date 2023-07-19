@@ -11,6 +11,8 @@ export const muscleGroupOptions: { name: string; value: string; id: number }[] =
     { name: 'Hamstring', value: 'Hamstring', id: 7 },
     { name: 'Calf', value: 'Calf', id: 8 },
     { name: 'Glute', value: 'Glute', id: 9 },
+    { name: 'Abs', value: 'Abs', id: 10 },
+    { name: 'Core', value: 'Core', id: 11 },
   ];
 
 export const equipmentOptions: { name: string; value: string; id: number }[] = [

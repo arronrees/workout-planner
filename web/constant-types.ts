@@ -64,3 +64,15 @@ export type ExerciseProgression = {
   reps: number;
   sets: number;
 };
+
+export type Workout = {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  userId: string;
+  name: string;
+  notes: string | null;
+  muscleGroup: MuscleGroup;
+  equipment: Equipment;
+  Exercises: Exercise[];
+};

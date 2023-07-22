@@ -131,7 +131,7 @@ export default function UpdateExerciseForm() {
         if (responseData.error && typeof responseData.error === 'string') {
           toast.error(responseData.error);
         } else {
-          toast.error('Could not update details, please try again.');
+          toast.error('Could not update exercise, please try again.');
         }
 
         setIsLoading(false);
@@ -143,7 +143,7 @@ export default function UpdateExerciseForm() {
         return;
       }
     } else {
-      toast.error('Could not update details, please try again.');
+      toast.error('Could not update exercise, please try again.');
     }
   };
 

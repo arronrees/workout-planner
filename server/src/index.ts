@@ -9,6 +9,7 @@ import { userRouter } from './routes/user.routes';
 import { exerciseRouter } from './routes/exercise.routes';
 import { checkJwtExits } from './middleware/auth.middleware';
 import path from 'path';
+import { workoutRouter } from './routes/workout.routes';
 
 export const prismaDB = new PrismaClient({
   errorFormat: 'pretty',
@@ -42,6 +43,7 @@ app.use('/api/auth', authRouter);
 app.use(checkJwtExits);
 app.use('/api/user', userRouter);
 app.use('/api/exercises', exerciseRouter);
+app.use('/api/workouts', workoutRouter);
 
 // error handler
 app.use('*', (req: Request, res: Response, next: NextFunction) => {

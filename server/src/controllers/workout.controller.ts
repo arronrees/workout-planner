@@ -83,7 +83,12 @@ export async function getSingleWorkout(
     const workoutFound = await prismaDB.workout.findUnique({
       where: { id: workoutId },
       include: {
-        Exercises: { orderBy: { createdAt: 'desc' } },
+        Exercises: {
+          orderBy: { createdAt: 'desc' },
+          include: {
+            ExerciseProgression: { orderBy: { createdAt: 'desc' }, take: 1 },
+          },
+        },
       },
     });
 
@@ -120,7 +125,7 @@ export async function createNewWorkoutController(
       if (!isValidUuid(exercise)) {
         return res
           .status(400)
-          .json({ success: false, error: 'Invalid exercise ID' });
+          .json({ success: false, error: 'Invalid workout ID' });
       }
     }
 

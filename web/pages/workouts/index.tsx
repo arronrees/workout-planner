@@ -1,5 +1,3 @@
-import ExerciseGrid from '@/components/exercises/ExerciseGrid';
-import NewExerciseGridItem from '@/components/exercises/NewExerciseGridItem';
 import DividerLine from '@/components/general/DividerLine';
 import WorkoutGrid from '@/components/workouts/WorkoutGrid';
 import { User } from '@/constant-types';
